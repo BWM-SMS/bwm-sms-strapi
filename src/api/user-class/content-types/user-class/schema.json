@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_classes",
+  "info": {
+    "singularName": "user-class",
+    "pluralName": "user-classes",
+    "displayName": "User Class"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userName": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "userClasses"
+    },
+    "className": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::class.class",
+      "inversedBy": "userClasses"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Full",
+        "Observer"
+      ],
+      "default": "Full",
+      "required": true
+    }
+  }
+}

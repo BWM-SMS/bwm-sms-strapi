@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "class_attendances",
+  "info": {
+    "singularName": "class-attendance",
+    "pluralName": "class-attendances",
+    "displayName": "Class Attendance"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "className": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::class.class",
+      "inversedBy": "classAttendances"
+    },
+    "lesson": {
+      "type": "enumeration",
+      "enum": [
+        "A. 善知识",
+        "B. 皈依"
+      ]
+    },
+    "classAttendanceDetails": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-attendance-detail.class-attendance-detail",
+      "mappedBy": "classAttendance"
+    }
+  }
+}

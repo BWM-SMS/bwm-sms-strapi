@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "class_attendance_details",
+  "info": {
+    "singularName": "class-attendance-detail",
+    "pluralName": "class-attendance-details",
+    "displayName": "Class Attendance Detail"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "classAttendance": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::class-attendance.class-attendance",
+      "inversedBy": "classAttendanceDetails"
+    },
+    "username": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "classAttendanceDetails"
+    }
+  }
+}

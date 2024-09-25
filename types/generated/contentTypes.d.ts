@@ -441,7 +441,6 @@ export interface PluginUsersPermissionsUser
     displayName: 'User';
   };
   options: {
-    timestamps: true;
     draftAndPublish: false;
   };
   attributes: {
@@ -470,6 +469,19 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    firstName: Schema.Attribute.String;
+    lastName: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.BigInteger;
+    birthYear: Schema.Attribute.Integer;
+    postalCode: Schema.Attribute.Integer;
+    userClasses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-class.user-class'
+    >;
+    classAttendanceDetails: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-attendance-detail.class-attendance-detail'
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -481,6 +493,159 @@ export interface PluginUsersPermissionsUser
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiClassClass extends Struct.CollectionTypeSchema {
+  collectionName: 'classes';
+  info: {
+    singularName: 'class';
+    pluralName: 'classes';
+    displayName: 'Class';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    className: Schema.Attribute.String;
+    type: Schema.Attribute.Enumeration<
+      [
+        'A: \u4E00\u8F6E\u73ED',
+        'B: \u589E\u4E0A\u73ED',
+        'C: \u6B62\u89C2\u73ED',
+        'D: \u5B97\u884C\u73ED',
+      ]
+    >;
+    language: Schema.Attribute.Enumeration<
+      ['C: \u534E\u6587', 'B: \u53CC\u8BED']
+    >;
+    classTime: Schema.Attribute.Time;
+    classDuration: Schema.Attribute.Integer;
+    userClasses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-class.user-class'
+    >;
+    classAttendances: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-attendance.class-attendance'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::class.class'>;
+  };
+}
+
+export interface ApiClassAttendanceClassAttendance
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'class_attendances';
+  info: {
+    singularName: 'class-attendance';
+    pluralName: 'class-attendances';
+    displayName: 'Class Attendance';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    date: Schema.Attribute.Date;
+    className: Schema.Attribute.Relation<'manyToOne', 'api::class.class'>;
+    lesson: Schema.Attribute.Enumeration<
+      ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
+    >;
+    classAttendanceDetails: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-attendance-detail.class-attendance-detail'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-attendance.class-attendance'
+    >;
+  };
+}
+
+export interface ApiClassAttendanceDetailClassAttendanceDetail
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'class_attendance_details';
+  info: {
+    singularName: 'class-attendance-detail';
+    pluralName: 'class-attendance-details';
+    displayName: 'Class Attendance Detail';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    classAttendance: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::class-attendance.class-attendance'
+    >;
+    username: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::class-attendance-detail.class-attendance-detail'
+    >;
+  };
+}
+
+export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
+  collectionName: 'user_classes';
+  info: {
+    singularName: 'user-class';
+    pluralName: 'user-classes';
+    displayName: 'User Class';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    userName: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    className: Schema.Attribute.Relation<'manyToOne', 'api::class.class'>;
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    type: Schema.Attribute.Enumeration<['Full', 'Observer']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Full'>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-class.user-class'
     >;
   };
 }
@@ -860,6 +1025,10 @@ declare module '@strapi/strapi' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::class.class': ApiClassClass;
+      'api::class-attendance.class-attendance': ApiClassAttendanceClassAttendance;
+      'api::class-attendance-detail.class-attendance-detail': ApiClassAttendanceDetailClassAttendanceDetail;
+      'api::user-class.user-class': ApiUserClassUserClass;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
       'admin::role': AdminRole;
