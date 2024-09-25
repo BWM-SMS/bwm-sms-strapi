@@ -4,7 +4,8 @@
   "info": {
     "singularName": "class",
     "pluralName": "classes",
-    "displayName": "Class"
+    "displayName": "Class",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -47,6 +48,16 @@
       "relation": "oneToMany",
       "target": "api::class-attendance.class-attendance",
       "mappedBy": "className"
+    },
+    "startDate": {
+      "type": "date"
+    },
+    "classDay": {
+      "type": "enumeration",
+      "enum": [
+        "Monday",
+        "Tuesday"
+      ]
     }
   }
 }

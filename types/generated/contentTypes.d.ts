@@ -503,6 +503,7 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     singularName: 'class';
     pluralName: 'classes';
     displayName: 'Class';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -530,6 +531,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::class-attendance.class-attendance'
     >;
+    startDate: Schema.Attribute.Date;
+    classDay: Schema.Attribute.Enumeration<['Monday', 'Tuesday']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
