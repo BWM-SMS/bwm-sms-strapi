@@ -474,13 +474,13 @@ export interface PluginUsersPermissionsUser
     phoneNumber: Schema.Attribute.BigInteger;
     birthYear: Schema.Attribute.Integer;
     postalCode: Schema.Attribute.Integer;
-    userClasses: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::user-class.user-class'
-    >;
     classAttendanceDetails: Schema.Attribute.Relation<
       'oneToMany',
       'api::class-attendance-detail.class-attendance-detail'
+    >;
+    userClasses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-class.user-class'
     >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
@@ -622,12 +622,13 @@ export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
     singularName: 'user-class';
     pluralName: 'user-classes';
     displayName: 'User Class';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    userName: Schema.Attribute.Relation<
+    username: Schema.Attribute.Relation<
       'manyToOne',
       'plugin::users-permissions.user'
     >;

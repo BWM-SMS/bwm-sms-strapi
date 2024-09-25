@@ -4,14 +4,15 @@
   "info": {
     "singularName": "user-class",
     "pluralName": "user-classes",
-    "displayName": "User Class"
+    "displayName": "User Class",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "userName": {
+    "username": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",

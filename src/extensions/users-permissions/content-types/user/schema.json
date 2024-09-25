@@ -80,16 +80,16 @@
     "postalCode": {
       "type": "integer"
     },
-    "userClasses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-class.user-class",
-      "mappedBy": "userName"
-    },
     "classAttendanceDetails": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::class-attendance-detail.class-attendance-detail",
+      "mappedBy": "username"
+    },
+    "userClasses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-class.user-class",
       "mappedBy": "username"
     }
   }
