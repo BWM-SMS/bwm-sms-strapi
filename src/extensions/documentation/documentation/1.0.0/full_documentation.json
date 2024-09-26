@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-09-26T06:40:31.209Z"
+    "x-generation-date": "2024-09-26T08:29:54.615Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4329,6 +4329,9 @@
                                   }
                                 }
                               },
+                              "note": {
+                                "type": "string"
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -4392,6 +4395,15 @@
                                 "type": "string"
                               }
                             }
+                          },
+                          "isAttend": {
+                            "type": "boolean"
+                          },
+                          "note": {
+                            "type": "string"
+                          },
+                          "rating": {
+                            "type": "integer"
                           },
                           "createdAt": {
                             "type": "string",
@@ -4732,6 +4744,9 @@
                   ],
                   "example": "string or id"
                 }
+              },
+              "note": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -5369,6 +5384,9 @@
                                       }
                                     }
                                   },
+                                  "note": {
+                                    "type": "string"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -5432,6 +5450,15 @@
                                     "type": "string"
                                   }
                                 }
+                              },
+                              "isAttend": {
+                                "type": "boolean"
+                              },
+                              "note": {
+                                "type": "string"
+                              },
+                              "rating": {
+                                "type": "integer"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -5738,6 +5765,9 @@
               }
             }
           },
+          "note": {
+            "type": "string"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -5809,6 +5839,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "isAttend"
+            ],
             "type": "object",
             "properties": {
               "classAttendance": {
@@ -5832,6 +5865,15 @@
                   }
                 ],
                 "example": "string or id"
+              },
+              "isAttend": {
+                "type": "boolean"
+              },
+              "note": {
+                "type": "string"
+              },
+              "rating": {
+                "type": "integer"
               },
               "locale": {
                 "type": "string"
@@ -5891,6 +5933,9 @@
       },
       "ClassAttendanceDetail": {
         "type": "object",
+        "required": [
+          "isAttend"
+        ],
         "properties": {
           "id": {
             "type": "number"
@@ -6455,6 +6500,15 @@
                                       }
                                     }
                                   },
+                                  "isAttend": {
+                                    "type": "boolean"
+                                  },
+                                  "note": {
+                                    "type": "string"
+                                  },
+                                  "rating": {
+                                    "type": "integer"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -6760,6 +6814,9 @@
                   }
                 }
               },
+              "note": {
+                "type": "string"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -6823,6 +6880,15 @@
                 "type": "string"
               }
             }
+          },
+          "isAttend": {
+            "type": "boolean"
+          },
+          "note": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "integer"
           },
           "createdAt": {
             "type": "string",
@@ -7744,6 +7810,9 @@
                             }
                           }
                         },
+                        "note": {
+                          "type": "string"
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -7807,6 +7876,15 @@
                           "type": "string"
                         }
                       }
+                    },
+                    "isAttend": {
+                      "type": "boolean"
+                    },
+                    "note": {
+                      "type": "string"
+                    },
+                    "rating": {
+                      "type": "integer"
                     },
                     "createdAt": {
                       "type": "string",

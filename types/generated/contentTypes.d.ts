@@ -469,7 +469,7 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    englishName: Schema.Attribute.Text & Schema.Attribute.Required;
+    englishName: Schema.Attribute.String & Schema.Attribute.Required;
     chineseName: Schema.Attribute.String;
     phoneNumber: Schema.Attribute.BigInteger &
       Schema.Attribute.SetMinMax<
@@ -574,6 +574,7 @@ export interface ApiClassAttendanceClassAttendance
     singularName: 'class-attendance';
     pluralName: 'class-attendances';
     displayName: 'Class Attendance';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -588,6 +589,7 @@ export interface ApiClassAttendanceClassAttendance
       'oneToMany',
       'api::class-attendance-detail.class-attendance-detail'
     >;
+    note: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -610,6 +612,7 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     singularName: 'class-attendance-detail';
     pluralName: 'class-attendance-details';
     displayName: 'Class Attendance Detail';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -623,6 +626,18 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    isAttend: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    note: Schema.Attribute.Text;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
