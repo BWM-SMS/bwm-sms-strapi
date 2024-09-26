@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-09-25T06:10:39.674Z"
+    "x-generation-date": "2024-09-26T06:40:31.209Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4139,10 +4139,10 @@
                         }
                       }
                     },
-                    "firstName": {
+                    "englishName": {
                       "type": "string"
                     },
-                    "lastName": {
+                    "chineseName": {
                       "type": "string"
                     },
                     "phoneNumber": {
@@ -4528,12 +4528,22 @@
                 "isActive": {
                   "type": "boolean"
                 },
-                "type": {
+                "position": {
                   "type": "string",
                   "enum": [
-                    "Full",
-                    "Observer"
+                    "A. 班长",
+                    "B. 副班长",
+                    "C. 关怀员",
+                    "D. 学员",
+                    "E. 旁听"
                   ]
+                },
+                "joinDate": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "note": {
+                  "type": "string"
                 },
                 "createdAt": {
                   "type": "string",
@@ -5286,10 +5296,10 @@
                             }
                           }
                         },
-                        "firstName": {
+                        "englishName": {
                           "type": "string"
                         },
-                        "lastName": {
+                        "chineseName": {
                           "type": "string"
                         },
                         "phoneNumber": {
@@ -5558,12 +5568,22 @@
                     "isActive": {
                       "type": "boolean"
                     },
-                    "type": {
+                    "position": {
                       "type": "string",
                       "enum": [
-                        "Full",
-                        "Observer"
+                        "A. 班长",
+                        "B. 副班长",
+                        "C. 关怀员",
+                        "D. 学员",
+                        "E. 旁听"
                       ]
+                    },
+                    "joinDate": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "note": {
+                      "type": "string"
                     },
                     "createdAt": {
                       "type": "string",
@@ -6385,10 +6405,10 @@
                                 }
                               }
                             },
-                            "firstName": {
+                            "englishName": {
                               "type": "string"
                             },
-                            "lastName": {
+                            "chineseName": {
                               "type": "string"
                             },
                             "phoneNumber": {
@@ -6570,12 +6590,22 @@
                         "isActive": {
                           "type": "boolean"
                         },
-                        "type": {
+                        "position": {
                           "type": "string",
                           "enum": [
-                            "Full",
-                            "Observer"
+                            "A. 班长",
+                            "B. 副班长",
+                            "C. 关怀员",
+                            "D. 学员",
+                            "E. 旁听"
                           ]
+                        },
+                        "joinDate": {
+                          "type": "string",
+                          "format": "date"
+                        },
+                        "note": {
+                          "type": "string"
                         },
                         "createdAt": {
                           "type": "string",
@@ -6867,7 +6897,8 @@
           "data": {
             "required": [
               "isActive",
-              "type"
+              "position",
+              "joinDate"
             ],
             "type": "object",
             "properties": {
@@ -6896,12 +6927,22 @@
               "isActive": {
                 "type": "boolean"
               },
-              "type": {
+              "position": {
                 "type": "string",
                 "enum": [
-                  "Full",
-                  "Observer"
+                  "A. 班长",
+                  "B. 副班长",
+                  "C. 关怀员",
+                  "D. 学员",
+                  "E. 旁听"
                 ]
+              },
+              "joinDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "note": {
+                "type": "string"
               },
               "locale": {
                 "type": "string"
@@ -6963,7 +7004,8 @@
         "type": "object",
         "required": [
           "isActive",
-          "type"
+          "position",
+          "joinDate"
         ],
         "properties": {
           "id": {
@@ -7419,10 +7461,10 @@
                   }
                 }
               },
-              "firstName": {
+              "englishName": {
                 "type": "string"
               },
-              "lastName": {
+              "chineseName": {
                 "type": "string"
               },
               "phoneNumber": {
@@ -7532,12 +7574,22 @@
                                   "isActive": {
                                     "type": "boolean"
                                   },
-                                  "type": {
+                                  "position": {
                                     "type": "string",
                                     "enum": [
-                                      "Full",
-                                      "Observer"
+                                      "A. 班长",
+                                      "B. 副班长",
+                                      "C. 关怀员",
+                                      "D. 学员",
+                                      "E. 旁听"
                                     ]
+                                  },
+                                  "joinDate": {
+                                    "type": "string",
+                                    "format": "date"
+                                  },
+                                  "note": {
+                                    "type": "string"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -7891,12 +7943,22 @@
           "isActive": {
             "type": "boolean"
           },
-          "type": {
+          "position": {
             "type": "string",
             "enum": [
-              "Full",
-              "Observer"
+              "A. 班长",
+              "B. 副班长",
+              "C. 关怀员",
+              "D. 学员",
+              "E. 旁听"
             ]
+          },
+          "joinDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "note": {
+            "type": "string"
           },
           "createdAt": {
             "type": "string",

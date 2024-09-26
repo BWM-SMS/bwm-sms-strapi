@@ -65,20 +65,29 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "firstName": {
-      "type": "string"
+    "englishName": {
+      "type": "text",
+      "required": true
     },
-    "lastName": {
+    "chineseName": {
       "type": "string"
     },
     "phoneNumber": {
-      "type": "biginteger"
+      "type": "biginteger",
+      "required": false,
+      "max": "999999999999999",
+      "min": "9999999"
     },
     "birthYear": {
-      "type": "integer"
+      "type": "integer",
+      "max": 2500,
+      "required": true,
+      "min": 1900
     },
     "postalCode": {
-      "type": "integer"
+      "type": "integer",
+      "max": 999999,
+      "min": 9999
     },
     "classAttendanceDetails": {
       "type": "relation",

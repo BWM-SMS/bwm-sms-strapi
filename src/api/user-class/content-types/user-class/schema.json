@@ -29,14 +29,24 @@
       "default": true,
       "required": true
     },
-    "type": {
+    "position": {
       "type": "enumeration",
       "enum": [
-        "Full",
-        "Observer"
+        "A. 班长",
+        "B. 副班长",
+        "C. 关怀员",
+        "D. 学员",
+        "E. 旁听"
       ],
-      "default": "Full",
+      "default": "D. 学员",
       "required": true
+    },
+    "joinDate": {
+      "type": "date",
+      "required": true
+    },
+    "note": {
+      "type": "text"
     }
   }
 }
