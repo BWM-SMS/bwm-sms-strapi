@@ -504,6 +504,8 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::user-class.user-class'
     >;
+    gender: Schema.Attribute.Enumeration<['Male', 'Female']> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

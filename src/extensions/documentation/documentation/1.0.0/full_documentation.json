@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-09-27T09:33:45.683Z"
+    "x-generation-date": "2024-09-28T04:30:12.236Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4473,6 +4473,13 @@
                         }
                       }
                     },
+                    "gender": {
+                      "type": "string",
+                      "enum": [
+                        "Male",
+                        "Female"
+                      ]
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -5528,6 +5535,13 @@
                             }
                           }
                         },
+                        "gender": {
+                          "type": "string",
+                          "enum": [
+                            "Male",
+                            "Female"
+                          ]
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -6576,6 +6590,13 @@
                                   }
                                 }
                               }
+                            },
+                            "gender": {
+                              "type": "string",
+                              "enum": [
+                                "Male",
+                                "Female"
+                              ]
                             },
                             "createdAt": {
                               "type": "string",
@@ -7953,6 +7974,13 @@
                     }
                   }
                 }
+              },
+              "gender": {
+                "type": "string",
+                "enum": [
+                  "Male",
+                  "Female"
+                ]
               },
               "createdAt": {
                 "type": "string",
