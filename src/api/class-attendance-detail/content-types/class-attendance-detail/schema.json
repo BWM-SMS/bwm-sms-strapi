@@ -4,7 +4,8 @@
   "info": {
     "singularName": "class-attendance-detail",
     "pluralName": "class-attendance-details",
-    "displayName": "Class Attendance Detail"
+    "displayName": "Class Attendance Detail",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -22,6 +23,19 @@
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "classAttendanceDetails"
+    },
+    "isAttend": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "note": {
+      "type": "text"
+    },
+    "rating": {
+      "type": "integer",
+      "max": 5,
+      "min": 0
     }
   }
 }

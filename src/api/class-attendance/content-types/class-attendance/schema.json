@@ -4,7 +4,8 @@
   "info": {
     "singularName": "class-attendance",
     "pluralName": "class-attendances",
-    "displayName": "Class Attendance"
+    "displayName": "Class Attendance",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -32,6 +33,9 @@
       "relation": "oneToMany",
       "target": "api::class-attendance-detail.class-attendance-detail",
       "mappedBy": "classAttendance"
+    },
+    "note": {
+      "type": "text"
     }
   }
 }

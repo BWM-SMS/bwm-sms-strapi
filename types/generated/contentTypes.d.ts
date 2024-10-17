@@ -469,11 +469,33 @@ export interface PluginUsersPermissionsUser
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    firstName: Schema.Attribute.String;
-    lastName: Schema.Attribute.String;
-    phoneNumber: Schema.Attribute.BigInteger;
-    birthYear: Schema.Attribute.Integer;
-    postalCode: Schema.Attribute.Integer;
+    englishName: Schema.Attribute.String & Schema.Attribute.Required;
+    chineseName: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.BigInteger &
+      Schema.Attribute.SetMinMax<
+        {
+          min: '9999999';
+          max: '999999999999999';
+        },
+        string
+      >;
+    birthYear: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1900;
+          max: 2500;
+        },
+        number
+      >;
+    postalCode: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 9999;
+          max: 999999;
+        },
+        number
+      >;
     classAttendanceDetails: Schema.Attribute.Relation<
       'oneToMany',
       'api::class-attendance-detail.class-attendance-detail'
@@ -482,6 +504,8 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::user-class.user-class'
     >;
+    gender: Schema.Attribute.Enumeration<['Male', 'Female']> &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -552,6 +576,7 @@ export interface ApiClassAttendanceClassAttendance
     singularName: 'class-attendance';
     pluralName: 'class-attendances';
     displayName: 'Class Attendance';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -566,6 +591,7 @@ export interface ApiClassAttendanceClassAttendance
       'oneToMany',
       'api::class-attendance-detail.class-attendance-detail'
     >;
+    note: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -588,6 +614,7 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     singularName: 'class-attendance-detail';
     pluralName: 'class-attendance-details';
     displayName: 'Class Attendance Detail';
+    description: '';
   };
   options: {
     draftAndPublish: false;
@@ -601,6 +628,18 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    isAttend: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
+    note: Schema.Attribute.Text;
+    rating: Schema.Attribute.Integer &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 5;
+        },
+        number
+      >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -636,9 +675,19 @@ export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
     isActive: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
-    type: Schema.Attribute.Enumeration<['Full', 'Observer']> &
+    position: Schema.Attribute.Enumeration<
+      [
+        'A. \u73ED\u957F',
+        'B. \u526F\u73ED\u957F',
+        'C. \u5173\u6000\u5458',
+        'D. \u5B66\u5458',
+        'E. \u65C1\u542C',
+      ]
+    > &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<'Full'>;
+      Schema.Attribute.DefaultTo<'D. \u5B66\u5458'>;
+    joinDate: Schema.Attribute.Date & Schema.Attribute.Required;
+    note: Schema.Attribute.Text;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
