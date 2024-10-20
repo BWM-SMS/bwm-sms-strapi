@@ -4,7 +4,6 @@ services:
 
   strapi:
     container_name: strapi
-    build: .
     image: strapi:latest
     restart: always
     env_file:
@@ -33,30 +32,6 @@ services:
       - 1337:1337
     networks:
       - strapi
-    depends_on:
-      - strapiDB
-
-  strapiDB:
-    container_name: strapiDB
-    image: postgres:latest
-    ports:
-      - 5432:5432
-    volumes:
-      - strapidb:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD=!QAZ#EDC5tgb7ujm
-      - POSTGRES_USER=postuser1
-      - POSTGRES_DB=strapiDB
-    networks:
-      - strapi
-
-volumes:
-  strapidb: 
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./data
 
 networks:
   strapi:
