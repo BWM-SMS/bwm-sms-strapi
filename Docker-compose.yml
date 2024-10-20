@@ -32,7 +32,7 @@ services:
       - 1337:1337
     networks:
       strapi:
-        ipv4_address: 192.168.24.3
+        ipv4_address: 192.168.23.3
 
   postgres:
     container_name: strapiDB
@@ -63,5 +63,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.24.0/24
-          gateway: 192.168.24.1
+        - subnet: 192.168.23.0/24
+          gateway: 192.168.23.1
