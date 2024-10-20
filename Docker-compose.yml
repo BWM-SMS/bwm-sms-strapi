@@ -34,6 +34,30 @@ services:
       strapi:
         ipv4_address: 192.168.24.3
 
+  postgres:
+    container_name: strapiDB
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=!QAZ#EDC5tgb7ujm
+      - POSTGRES_USER=postuser1
+      - POSTGRES_DB=strapi_DB
+    networks:
+      strapi:
+        ipv4_address: 192.168.23.2
+
+volumes:
+  postgres: 
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data
+
+
 networks:
   strapi:
     driver: bridge
