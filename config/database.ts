@@ -1,7 +1,7 @@
 import path from 'path';
 
 export default ({ env }) => {
-  const client = env('DATABASE_CLIENT', 'postgres');
+  const client = env('DATABASE_CLIENT', 'pg');
 
   const connections = {
     mysql: {
@@ -25,7 +25,7 @@ export default ({ env }) => {
     postgres: {
       connection: {
         connectionString: env('DATABASE_URL'),
-        host: env('DATABASE_HOST', '192.168.23.2'),
+        host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
         database: env('DATABASE_NAME', 'strapiDB'),
         user: env('DATABASE_USERNAME', 'postuser1'),
