@@ -52,7 +52,6 @@ services:
 
 volumes:
   strapi_DB:
-    strapi:
 
 networks:
   strapi:
