@@ -10,7 +10,7 @@ services:
       .env
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
-      DATABASE_HOST: strapiDB
+      DATABASE_HOST: ${DATABASE_HOST}
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_NAME: ${DATABASE_NAME}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
@@ -34,7 +34,7 @@ services:
       strapi:
         ipv4_address: 192.168.23.3
 
-  postgres:
+  strapi_DB:
     container_name: strapiDB
     image: postgres:latest
     ports:
@@ -49,13 +49,6 @@ services:
       strapi:
         ipv4_address: 192.168.23.2
 
-volumes:
-  postgres: 
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ./data
 
 
 networks:
