@@ -31,8 +31,13 @@ services:
     ports:
       - 1337:1337
     networks:
-      - strapi
+      strapi:
+        ipv4_address: 192.168.24.3
 
 networks:
   strapi:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.24.0/24
+          gateway: 192.168.24.1
