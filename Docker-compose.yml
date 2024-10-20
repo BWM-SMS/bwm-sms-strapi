@@ -1,0 +1,63 @@
+version: '3.9'  
+
+services:
+
+  strapi:
+    container_name: strapi
+    build: .
+    image: strapi:latest
+    restart: always
+    env_file:
+      .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: strapiDB
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      JWT_SECRET: ${JWT_SECRET}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+      APP_KEYS: ${APP_KEYS}
+      NODE_ENV: ${NODE_ENV}
+
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env:/opt/app/.env
+      - ./public/uploads:/opt/app/public/upload
+
+    ports:
+      - 1337:1337
+    networks:
+      - strapi
+    depends_on:
+      - strapiDB
+
+  strapiDB:
+    container_name: strapiDB
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+      - strapidb:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=!QAZ#EDC5tgb7ujm
+      - POSTGRES_USER=postuser1
+      - POSTGRES_DB=strapiDB
+    networks:
+      - strapi
+
+volumes:
+  strapidb: 
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./data
+
+networks:
+  strapi:
+    driver: bridge
