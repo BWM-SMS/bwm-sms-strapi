@@ -36,6 +36,7 @@ services:
 
   strapi_DB:
     container_name: strapiDB
+    hostname: strapiDB
     image: postgres:latest
     ports:
       - 5432:5432
@@ -44,12 +45,14 @@ services:
     environment:
       - POSTGRES_PASSWORD=!QAZ#EDC5tgb7ujm
       - POSTGRES_USER=postuser1
-      - POSTGRES_DB=strapi_DB
+      - POSTGRES_DB=strapiDB
     networks:
       strapi:
         ipv4_address: 192.168.23.2
 
-
+volumes:
+  strapi_DB:
+    strapi:
 
 networks:
   strapi:
