@@ -35,7 +35,6 @@ services:
       - 1337:1337
     networks:
       strapi:
-        ipv4_address: 192.168.23.3
 
   strapi_DB:
     container_name: strapiDB
@@ -51,7 +50,6 @@ services:
       - POSTGRES_DB=strapiDB
     networks:
       strapi:
-        ipv4_address: 192.168.23.2
 
 volumes:
   strapi-data:
@@ -59,7 +57,3 @@ volumes:
 networks:
   strapi:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.23.0/24
-          gateway: 192.168.23.1
