@@ -108,6 +108,24 @@
         "Female"
       ],
       "required": true
+    },
+    "joinYear": {
+      "type": "integer",
+      "required": true
+    },
+    "hobby": {
+      "type": "enumeration",
+      "enum": [
+        "Reading",
+        "Singing"
+      ]
+    },
+    "skill": {
+      "type": "enumeration",
+      "enum": [
+        "IT",
+        "Drawing"
+      ]
     }
   }
 }

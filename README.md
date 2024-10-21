@@ -42,6 +42,14 @@ Strapi gives you many possible deployment options for your project including [St
 yarn strapi deploy
 ```
 
+## Docker Deployment
+
+
+```
+docker build . -t strapi
+docker compose up
+```
+
 ## 📚 Learn more
 
 - [Resource center](https://strapi.io/resource-center) - Strapi resource center.
