@@ -515,6 +515,9 @@ export interface PluginUsersPermissionsUser
     >;
     gender: Schema.Attribute.Enumeration<['Male', 'Female']> &
       Schema.Attribute.Required;
+    joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
+    hobby: Schema.Attribute.Enumeration<['Reading', 'Singing']>;
+    skill: Schema.Attribute.Enumeration<['IT', 'Drawing']>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

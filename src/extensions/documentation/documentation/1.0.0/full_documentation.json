@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-21T06:14:06.198Z"
+    "x-generation-date": "2024-10-21T06:51:39.068Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4480,6 +4480,23 @@
                         "Female"
                       ]
                     },
+                    "joinYear": {
+                      "type": "integer"
+                    },
+                    "hobby": {
+                      "type": "string",
+                      "enum": [
+                        "Reading",
+                        "Singing"
+                      ]
+                    },
+                    "skill": {
+                      "type": "string",
+                      "enum": [
+                        "IT",
+                        "Drawing"
+                      ]
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -5542,6 +5559,23 @@
                             "Female"
                           ]
                         },
+                        "joinYear": {
+                          "type": "integer"
+                        },
+                        "hobby": {
+                          "type": "string",
+                          "enum": [
+                            "Reading",
+                            "Singing"
+                          ]
+                        },
+                        "skill": {
+                          "type": "string",
+                          "enum": [
+                            "IT",
+                            "Drawing"
+                          ]
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -6596,6 +6630,23 @@
                               "enum": [
                                 "Male",
                                 "Female"
+                              ]
+                            },
+                            "joinYear": {
+                              "type": "integer"
+                            },
+                            "hobby": {
+                              "type": "string",
+                              "enum": [
+                                "Reading",
+                                "Singing"
+                              ]
+                            },
+                            "skill": {
+                              "type": "string",
+                              "enum": [
+                                "IT",
+                                "Drawing"
                               ]
                             },
                             "createdAt": {
@@ -7980,6 +8031,23 @@
                 "enum": [
                   "Male",
                   "Female"
+                ]
+              },
+              "joinYear": {
+                "type": "integer"
+              },
+              "hobby": {
+                "type": "string",
+                "enum": [
+                  "Reading",
+                  "Singing"
+                ]
+              },
+              "skill": {
+                "type": "string",
+                "enum": [
+                  "IT",
+                  "Drawing"
                 ]
               },
               "createdAt": {
