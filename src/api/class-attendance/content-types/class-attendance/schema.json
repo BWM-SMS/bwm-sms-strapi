@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "date": {
-      "type": "date"
+      "type": "date",
+      "required": true
     },
     "className": {
       "type": "relation",
@@ -36,6 +37,14 @@
     },
     "note": {
       "type": "text"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "A. 研讨班",
+        "B. 忆师恩"
+      ],
+      "required": true
     }
   }
 }

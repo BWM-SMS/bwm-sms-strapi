@@ -1,0 +1,31 @@
+{
+  "kind": "singleType",
+  "collectionName": "configurations",
+  "info": {
+    "singularName": "configuration",
+    "pluralName": "configurations",
+    "displayName": "Configuration",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "openTakeAttendance": {
+      "type": "integer",
+      "default": 60,
+      "required": true
+    },
+    "closeTakeAttendance": {
+      "type": "integer",
+      "default": 30,
+      "required": true
+    },
+    "closeSubmitAttendance": {
+      "type": "integer",
+      "default": 1440,
+      "required": true
+    }
+  }
+}

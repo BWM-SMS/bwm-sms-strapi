@@ -518,6 +518,13 @@ export interface PluginUsersPermissionsUser
     joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
     hobby: Schema.Attribute.Enumeration<['Reading', 'Singing']>;
     skill: Schema.Attribute.Enumeration<['IT', 'Drawing']>;
+    image: Schema.Attribute.Media<'images'>;
+    acceptPDPA: Schema.Attribute.Boolean;
+    localization: Schema.Attribute.Enumeration<
+      ['English', 'Chinese (\u4E2D\u6587)']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'English'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -596,7 +603,7 @@ export interface ApiClassAttendanceClassAttendance
     draftAndPublish: false;
   };
   attributes: {
-    date: Schema.Attribute.Date;
+    date: Schema.Attribute.Date & Schema.Attribute.Required;
     className: Schema.Attribute.Relation<'manyToOne', 'api::class.class'>;
     lesson: Schema.Attribute.Enumeration<
       ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
@@ -606,6 +613,10 @@ export interface ApiClassAttendanceClassAttendance
       'api::class-attendance-detail.class-attendance-detail'
     >;
     note: Schema.Attribute.Text;
+    type: Schema.Attribute.Enumeration<
+      ['A. \u7814\u8BA8\u73ED', 'B. \u5FC6\u5E08\u6069']
+    > &
+      Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -666,6 +677,89 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::class-attendance-detail.class-attendance-detail'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiConfigurationConfiguration extends Struct.SingleTypeSchema {
+  collectionName: 'configurations';
+  info: {
+    singularName: 'configuration';
+    pluralName: 'configurations';
+    displayName: 'Configuration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    openTakeAttendance: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<60>;
+    closeTakeAttendance: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<30>;
+    closeSubmitAttendance: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<1440>;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::configuration.configuration'
+    > &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiEnrollmentEnrollment extends Struct.CollectionTypeSchema {
+  collectionName: 'enrollments';
+  info: {
+    singularName: 'enrollment';
+    pluralName: 'enrollments';
+    displayName: 'Enrollment';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    englishName: Schema.Attribute.String & Schema.Attribute.Required;
+    chineseName: Schema.Attribute.String;
+    phoneNumber: Schema.Attribute.BigInteger & Schema.Attribute.Required;
+    birthYear: Schema.Attribute.Integer & Schema.Attribute.Required;
+    email: Schema.Attribute.String;
+    gender: Schema.Attribute.Enumeration<['Male', 'Female']> &
+      Schema.Attribute.Required;
+    classDay: Schema.Attribute.Enumeration<
+      [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+      ]
+    > &
+      Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    publishedAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::enrollment.enrollment'
     > &
       Schema.Attribute.Private;
   };
@@ -1105,6 +1199,8 @@ declare module '@strapi/strapi' {
       'api::class.class': ApiClassClass;
       'api::class-attendance.class-attendance': ApiClassAttendanceClassAttendance;
       'api::class-attendance-detail.class-attendance-detail': ApiClassAttendanceDetailClassAttendanceDetail;
+      'api::configuration.configuration': ApiConfigurationConfiguration;
+      'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'api::user-class.user-class': ApiUserClassUserClass;
       'admin::permission': AdminPermission;
       'admin::user': AdminUser;
