@@ -7,7 +7,40 @@
 const { createCoreService: createCoreServiceAttendance } = require('@strapi/strapi').factories;
 
 module.exports = {
-    async recurring(classData) {
+    async recurringService() {
+        try {
+            const currentDate = new Date();
+            const currentDay = currentDate.getDay();
+            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            const currentDayName = dayNames[currentDay];
+
+            const classData = await strapi.db.query('api::class.class').findMany({
+                where: {
+                    classDay: "Tuesday"
+                },
+                populate: {
+                    userClasses: {
+                        fields: ["id"],
+                        populate: {
+                            username: {
+                                fields: ['username']
+                            }
+                        }
+                    }
+                }
+            });
+
+            const data = await strapi
+                .service("api::class-attendance-custom.class-attendance-custom")
+                .createAttendanceAndDetails(classData);
+
+            return data;
+        } catch (err) {
+            console.error('Error in recurring service:', err);
+            throw err;
+        }
+    },
+    async createAttendanceAndDetails(classData) {
         try {
             // Loop through each class in classData
             for (const classItem of classData) {
