@@ -14,7 +14,7 @@ module.exports = {
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
             const currentDayName = dayNames[currentDay];
 
-            const classData = await strapi.db.query('api::class.class').findMany({
+            const classData = await strapi.documents('api::class.class').findMany({
                 where: {
                     classDay: "Tuesday"
                 },
@@ -61,7 +61,7 @@ module.exports = {
 
                 //  Step 2: Create attendance details for each user in the class
                 for (const userClass of classItem.userClasses) {
-                    await strapi.entityService.create('api::class-attendance-detail.class-attendance-detail', {
+                    await strapi.documents('api::class-attendance-detail.class-attendance-detail').create({
                         data: {
                             classAttendance: attendanceId, // Reference to the attendance record
                             username: userClass.username.documentId, // Reference to the user
@@ -79,4 +79,17 @@ module.exports = {
         }
 
     },
+    async currentAttendanceService(ctx) {
+        try {
+            const configurationId = 1; // Replace with the actual ID of the configuration you want to retrieve
+            const configurationData = await strapi.entityService.findOne('api::configuration.configuration', configurationId, {
+            });
+
+            return configurationData;
+        } catch (err) {
+            console.error('Error in recurring service:', err);
+            throw err;
+        }
+    }
+    
 };

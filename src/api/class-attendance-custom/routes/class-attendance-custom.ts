@@ -4,10 +4,11 @@ export default {
      method: 'GET',
      path: '/class-attendance/recurring',
      handler: 'class-attendance-custom.recurring',
-     config: {
-       policies: [],
-       middlewares: [],
-     },
     },
+    {
+      method: 'GET',
+      path: '/class-attendance/current',
+      handler: 'class-attendance-custom.currentAttendanc',
+     },
   ],
 };
