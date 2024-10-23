@@ -45,6 +45,14 @@
         "B. 忆师恩"
       ],
       "required": true
+    },
+    "startTime": {
+      "type": "time",
+      "required": true
+    },
+    "endTime": {
+      "type": "time",
+      "required": true
     }
   }
 }

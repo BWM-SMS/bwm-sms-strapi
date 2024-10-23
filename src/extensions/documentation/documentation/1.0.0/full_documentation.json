@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-23T06:49:19.965Z"
+    "x-generation-date": "2024-10-23T10:13:17.004Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4414,8 +4414,13 @@
               "classDay": {
                 "type": "string",
                 "enum": [
+                  "Sunday",
                   "Monday",
-                  "Tuesday"
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
                 ]
               },
               "locale": {
@@ -5080,8 +5085,13 @@
                                   "classDay": {
                                     "type": "string",
                                     "enum": [
+                                      "Sunday",
                                       "Monday",
-                                      "Tuesday"
+                                      "Tuesday",
+                                      "Wednesday",
+                                      "Thursday",
+                                      "Friday",
+                                      "Saturday"
                                     ]
                                   },
                                   "createdAt": {
@@ -5167,6 +5177,16 @@
                                   "A. 研讨班",
                                   "B. 忆师恩"
                                 ]
+                              },
+                              "startTime": {
+                                "type": "string",
+                                "format": "time",
+                                "example": "12:54.000"
+                              },
+                              "endTime": {
+                                "type": "string",
+                                "format": "time",
+                                "example": "12:54.000"
                               },
                               "createdAt": {
                                 "type": "string",
@@ -5848,8 +5868,13 @@
           "classDay": {
             "type": "string",
             "enum": [
+              "Sunday",
               "Monday",
-              "Tuesday"
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
             ]
           },
           "createdAt": {
@@ -5925,7 +5950,9 @@
           "data": {
             "required": [
               "date",
-              "type"
+              "type",
+              "startTime",
+              "endTime"
             ],
             "type": "object",
             "properties": {
@@ -5974,6 +6001,16 @@
                   "A. 研讨班",
                   "B. 忆师恩"
                 ]
+              },
+              "startTime": {
+                "type": "string",
+                "format": "time",
+                "example": "12:54.000"
+              },
+              "endTime": {
+                "type": "string",
+                "format": "time",
+                "example": "12:54.000"
               },
               "locale": {
                 "type": "string"
@@ -6035,7 +6072,9 @@
         "type": "object",
         "required": [
           "date",
-          "type"
+          "type",
+          "startTime",
+          "endTime"
         ],
         "properties": {
           "id": {
@@ -6624,6 +6663,16 @@
                                       "A. 研讨班",
                                       "B. 忆师恩"
                                     ]
+                                  },
+                                  "startTime": {
+                                    "type": "string",
+                                    "format": "time",
+                                    "example": "12:54.000"
+                                  },
+                                  "endTime": {
+                                    "type": "string",
+                                    "format": "time",
+                                    "example": "12:54.000"
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -7305,8 +7354,13 @@
               "classDay": {
                 "type": "string",
                 "enum": [
+                  "Sunday",
                   "Monday",
-                  "Tuesday"
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
                 ]
               },
               "createdAt": {
@@ -7392,6 +7446,16 @@
               "A. 研讨班",
               "B. 忆师恩"
             ]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time",
+            "example": "12:54.000"
           },
           "createdAt": {
             "type": "string",
@@ -8741,8 +8805,13 @@
                   "classDay": {
                     "type": "string",
                     "enum": [
+                      "Sunday",
                       "Monday",
-                      "Tuesday"
+                      "Tuesday",
+                      "Wednesday",
+                      "Thursday",
+                      "Friday",
+                      "Saturday"
                     ]
                   },
                   "createdAt": {
@@ -8828,6 +8897,16 @@
                   "A. 研讨班",
                   "B. 忆师恩"
                 ]
+              },
+              "startTime": {
+                "type": "string",
+                "format": "time",
+                "example": "12:54.000"
+              },
+              "endTime": {
+                "type": "string",
+                "format": "time",
+                "example": "12:54.000"
               },
               "createdAt": {
                 "type": "string",
@@ -10785,8 +10864,13 @@
                             "classDay": {
                               "type": "string",
                               "enum": [
+                                "Sunday",
                                 "Monday",
-                                "Tuesday"
+                                "Tuesday",
+                                "Wednesday",
+                                "Thursday",
+                                "Friday",
+                                "Saturday"
                               ]
                             },
                             "createdAt": {
@@ -10872,6 +10956,16 @@
                             "A. 研讨班",
                             "B. 忆师恩"
                           ]
+                        },
+                        "startTime": {
+                          "type": "string",
+                          "format": "time",
+                          "example": "12:54.000"
+                        },
+                        "endTime": {
+                          "type": "string",
+                          "format": "time",
+                          "example": "12:54.000"
                         },
                         "createdAt": {
                           "type": "string",

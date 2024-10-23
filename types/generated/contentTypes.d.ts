@@ -576,7 +576,17 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'api::class-attendance.class-attendance'
     >;
     startDate: Schema.Attribute.Date;
-    classDay: Schema.Attribute.Enumeration<['Monday', 'Tuesday']>;
+    classDay: Schema.Attribute.Enumeration<
+      [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ]
+    >;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -617,6 +627,8 @@ export interface ApiClassAttendanceClassAttendance
       ['A. \u7814\u8BA8\u73ED', 'B. \u5FC6\u5E08\u6069']
     > &
       Schema.Attribute.Required;
+    startTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    endTime: Schema.Attribute.Time & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -656,7 +668,7 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     >;
     isAttend: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
-      Schema.Attribute.DefaultTo<true>;
+      Schema.Attribute.DefaultTo<false>;
     note: Schema.Attribute.Text;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
@@ -688,7 +700,6 @@ export interface ApiConfigurationConfiguration extends Struct.SingleTypeSchema {
     singularName: 'configuration';
     pluralName: 'configurations';
     displayName: 'Configuration';
-    description: '';
   };
   options: {
     draftAndPublish: false;

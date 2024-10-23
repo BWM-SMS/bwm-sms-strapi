@@ -4,8 +4,7 @@
   "info": {
     "singularName": "configuration",
     "pluralName": "configurations",
-    "displayName": "Configuration",
-    "description": ""
+    "displayName": "Configuration"
   },
   "options": {
     "draftAndPublish": false
@@ -14,8 +13,8 @@
   "attributes": {
     "openTakeAttendance": {
       "type": "integer",
-      "default": 60,
-      "required": true
+      "required": true,
+      "default": 60
     },
     "closeTakeAttendance": {
       "type": "integer",

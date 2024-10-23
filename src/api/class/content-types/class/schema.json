@@ -55,8 +55,13 @@
     "classDay": {
       "type": "enumeration",
       "enum": [
+        "Sunday",
         "Monday",
-        "Tuesday"
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
       ]
     }
   }

@@ -16,7 +16,7 @@ module.exports = {
 
             const classData = await strapi.documents('api::class.class').findMany({
                 where: {
-                    classDay: "Tuesday"
+                    classDay: currentDayName
                 },
                 populate: {
                     userClasses: {
@@ -50,6 +50,8 @@ module.exports = {
                     data: {
                         date: new Date(), // Set the date for the attendance
                         className: classItem.documentId, // Reference to the class
+                        startTime: classItem.classTime, // Set the start time for the class
+                        endTime: addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
                         type: "A. 研讨班",
                         updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                         createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin user
@@ -65,7 +67,7 @@ module.exports = {
                         data: {
                             classAttendance: attendanceId, // Reference to the attendance record
                             username: userClass.username.documentId, // Reference to the user
-                            isAttend: undefined,
+                            isAttend: false,
                             updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                             createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin users
                         },
@@ -81,15 +83,78 @@ module.exports = {
     },
     async currentAttendanceService(ctx) {
         try {
-            const configurationId = 1; // Replace with the actual ID of the configuration you want to retrieve
-            const configurationData = await strapi.entityService.findOne('api::configuration.configuration', configurationId, {
+            const user = ctx.state.user;
+            const currentDate = new Date();
+            const currentTime = getTimeString(currentDate);
+
+            const openTakeAttendance = 60 // Replace to Strapi Configuration
+            const closeTakeAttendance = 30 // Replace to Strapi Configuration
+
+            const openTakeTime = addDurationToTime(currentTime, openTakeAttendance);
+            const closeTakeTime = subtractDurationFromTime(currentTime, closeTakeAttendance);
+
+            const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
+                where: {
+                    isAttend: false,
+                    username: user.id,
+                    classAttendance: {
+                        date: currentDate,
+                        startTime: {
+                            $lte: openTakeTime
+                        },
+                        endTime: {
+                            $gte: closeTakeTime
+                        }
+                    },
+                },
+                populate: {
+                    classAttendance: {
+                        fields: ["id", "date", "startTime", "endTime"],
+                        populate: {
+                            className: {
+                                fields: ["id", "className"]
+                            }
+                        }
+                    },
+                    username:{
+                        fields: ["id","englishName","chineseName"]
+                    }
+                }
             });
 
-            return configurationData;
+
+            return classData;
         } catch (err) {
             console.error('Error in recurring service:', err);
             throw err;
         }
     }
-    
+
 };
+
+function addDurationToTime(timeString: string, durationMinutes: number): string {
+    // Parse the time string into a Date object
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const baseDate = new Date();
+    baseDate.setHours(hours, minutes, seconds, 0);
+
+    // Add the duration in minutes
+    const newTime = new Date(baseDate.getTime() + durationMinutes * 60000);
+
+    return getTimeString(newTime);
+}
+
+function subtractDurationFromTime(timeString: string, durationMinutes: number): string {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const baseDate = new Date();
+    baseDate.setHours(hours, minutes, seconds, 0);
+
+    // Subtract the duration in minutes
+    const newTime = new Date(baseDate.getTime() - durationMinutes * 60000);
+
+    return getTimeString(newTime);
+}
+
+function getTimeString(date: Date): string {
+    return date.toTimeString().split(' ')[0];
+}
