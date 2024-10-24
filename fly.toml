@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for bwm-sms-backend on 2024-10-24T22:15:50+08:00
+# fly.toml app configuration file generated for bwm-sms-backend on 2024-10-25T00:55:57+08:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,25 +7,13 @@ app = 'bwm-sms-backend'
 primary_region = 'sin'
 
 [build]
-  dockerfile= "./Dockerfile"
-[[mounts]]
-  source = 'bwm_sms_db'
-  destination = '/var/lib/postgresql/data'
 
-[http_service]
-  internal_port = 1337
-  force_https = true
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ['app']
 
 [[services]]
   protocol = 'tcp'
   internal_port = 1337
   auto_stop_machines = 'stop'
   auto_start_machines = true
-  min_machines_running = 0
 
   [[services.ports]]
     port = 80
@@ -36,6 +24,6 @@ primary_region = 'sin'
     handlers = ['tls', 'http']
 
 [[vm]]
-  memory = '1gb'
+  memory = '2gb'
   cpu_kind = 'shared'
   cpus = 1

@@ -1,10 +1,9 @@
 version: '3.9'  
 
 services:
-
   strapi:
     container_name: strapi
-    image: strapi:latest
+    image: ahblublu/bwm-sms-strap:v1.0
     restart: always
     env_file:
       .env
