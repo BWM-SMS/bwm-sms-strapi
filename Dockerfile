@@ -30,8 +30,8 @@ COPY . .
 RUN chown -R node:node /opt/app
 USER node
 
-# Build the application
-RUN ["npm", "run", "build"]
+# Build the application, the below code is meant for local staging env
+#RUN ["npm", "run", "build"]
 
 # Expose the necessary port and set the command to run the application
 EXPOSE 1337
