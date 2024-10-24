@@ -7,7 +7,7 @@ app = 'bwm-sms-backend'
 primary_region = 'sin'
 
 [build]
-  dockerfile=Docker-compose.yml
+  dockerfile= "./Dockerfile"
 [[mounts]]
   source = 'bwm_sms_db'
   destination = '/var/lib/postgresql/data'
