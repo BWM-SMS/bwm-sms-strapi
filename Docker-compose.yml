@@ -34,7 +34,7 @@ services:
     ports:
       - 1337:1337
     networks:
-      strapi:
+      - strapi
 
   strapi_DB:
     container_name: strapiDB
@@ -47,7 +47,7 @@ services:
       - POSTGRES_USER=postuser1
       - POSTGRES_DB=strapiDB
     networks:
-      strapi:
+      - strapi
 
 volumes:
   strapi-data:
