@@ -113,20 +113,6 @@
       "type": "integer",
       "required": true
     },
-    "hobby": {
-      "type": "enumeration",
-      "enum": [
-        "Reading",
-        "Singing"
-      ]
-    },
-    "skill": {
-      "type": "enumeration",
-      "enum": [
-        "IT",
-        "Drawing"
-      ]
-    },
     "image": {
       "type": "media",
       "multiple": false,
@@ -147,6 +133,24 @@
       ],
       "default": "English",
       "required": true
+    },
+    "hobby": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Reading",
+        "Singing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "skill": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "IT",
+        "Drawing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-23T10:13:17.004Z"
+    "x-generation-date": "2024-10-25T09:44:59.642Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5339,20 +5339,6 @@
                     "joinYear": {
                       "type": "integer"
                     },
-                    "hobby": {
-                      "type": "string",
-                      "enum": [
-                        "Reading",
-                        "Singing"
-                      ]
-                    },
-                    "skill": {
-                      "type": "string",
-                      "enum": [
-                        "IT",
-                        "Drawing"
-                      ]
-                    },
                     "image": {
                       "type": "object",
                       "properties": {
@@ -5709,6 +5695,8 @@
                         "Chinese (中文)"
                       ]
                     },
+                    "hobby": {},
+                    "skill": {},
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -6825,20 +6813,6 @@
                         "joinYear": {
                           "type": "integer"
                         },
-                        "hobby": {
-                          "type": "string",
-                          "enum": [
-                            "Reading",
-                            "Singing"
-                          ]
-                        },
-                        "skill": {
-                          "type": "string",
-                          "enum": [
-                            "IT",
-                            "Drawing"
-                          ]
-                        },
                         "image": {
                           "type": "object",
                           "properties": {
@@ -7195,6 +7169,8 @@
                             "Chinese (中文)"
                           ]
                         },
+                        "hobby": {},
+                        "skill": {},
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -8276,20 +8252,6 @@
                             "joinYear": {
                               "type": "integer"
                             },
-                            "hobby": {
-                              "type": "string",
-                              "enum": [
-                                "Reading",
-                                "Singing"
-                              ]
-                            },
-                            "skill": {
-                              "type": "string",
-                              "enum": [
-                                "IT",
-                                "Drawing"
-                              ]
-                            },
                             "image": {
                               "type": "object",
                               "properties": {
@@ -8646,6 +8608,8 @@
                                 "Chinese (中文)"
                               ]
                             },
+                            "hobby": {},
+                            "skill": {},
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -11118,20 +11082,6 @@
               "joinYear": {
                 "type": "integer"
               },
-              "hobby": {
-                "type": "string",
-                "enum": [
-                  "Reading",
-                  "Singing"
-                ]
-              },
-              "skill": {
-                "type": "string",
-                "enum": [
-                  "IT",
-                  "Drawing"
-                ]
-              },
               "image": {
                 "type": "object",
                 "properties": {
@@ -11488,6 +11438,8 @@
                   "Chinese (中文)"
                 ]
               },
+              "hobby": {},
+              "skill": {},
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
