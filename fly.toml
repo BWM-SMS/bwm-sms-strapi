@@ -1,27 +1,24 @@
-# fly.toml app configuration file generated for bwm-sms-backend on 2024-10-25T00:55:57+08:00
-#
+# 
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'bwm-sms-backend'
+app = 'bwm-sms-strapi'
 primary_region = 'sin'
 
 [build]
 
-
 [[services]]
-  protocol = 'tcp'
   internal_port = 1337
-  auto_stop_machines = 'stop'
-  auto_start_machines = true
+  protocol = "tcp"
 
   [[services.ports]]
+    handlers = ["http"]
     port = 80
-    handlers = ['http']
 
   [[services.ports]]
+    handlers = ["tls", "http"]
     port = 443
-    handlers = ['tls', 'http']
+ 
 
 [[vm]]
   memory = '2gb'
