@@ -8,7 +8,12 @@ export default {
     {
       method: 'GET',
       path: '/class-attendance/current',
-      handler: 'class-attendance-custom.currentAttendanc',
+      handler: 'class-attendance-custom.currentAttendance',
+     },
+     {
+      method: 'GET',
+      path: '/class-attendance/history',
+      handler: 'class-attendance-custom.attendanceHistory',
      },
   ],
 };

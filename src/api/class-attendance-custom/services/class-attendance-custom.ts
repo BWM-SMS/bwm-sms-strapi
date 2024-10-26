@@ -12,10 +12,10 @@ module.exports = {
             const currentDate = new Date();
             const currentDay = currentDate.getDay();
             const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const currentDayName = dayNames[currentDay];
+            const currentDayName: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" = dayNames[currentDay] as "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 
             const classData = await strapi.documents('api::class.class').findMany({
-                where: {
+                filters: {
                     classDay: currentDayName
                 },
                 populate: {
@@ -94,7 +94,7 @@ module.exports = {
             const closeTakeTime = subtractDurationFromTime(currentTime, closeTakeAttendance);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
-                where: {
+                filters: {
                     isAttend: false,
                     username: user.id,
                     classAttendance: {
@@ -116,12 +116,45 @@ module.exports = {
                             }
                         }
                     },
-                    username:{
-                        fields: ["id","englishName","chineseName"]
+                    username: {
+                        fields: ["id", "englishName", "chineseName"]
                     }
                 }
             });
 
+
+            return classData;
+        } catch (err) {
+            console.error('Error in recurring service:', err);
+            throw err;
+        }
+    },
+    async attendanceHistoryService(ctx) {
+        try {
+            const user = ctx.state.user;
+            const currentDate = new Date();
+
+            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+
+            const lastDateHistory = getLastNMonthsDate(currentDate, lastNMonthHistory);
+            console.log(lastDateHistory);
+
+            const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
+                filters: {
+                    username: user.id,
+                    classAttendance: {
+                        date: {
+                            $gte: lastDateHistory
+                        },
+                    },
+                },
+                populate: {
+                    classAttendance: {
+                        fields: ["id", "date"]
+                    },
+                },
+                sort: "createdAt:desc"
+            });
 
             return classData;
         } catch (err) {
@@ -157,4 +190,9 @@ function subtractDurationFromTime(timeString: string, durationMinutes: number): 
 
 function getTimeString(date: Date): string {
     return date.toTimeString().split(' ')[0];
+}
+
+function getLastNMonthsDate(currentDate: Date, n: number): Date {
+    currentDate.setMonth(currentDate.getMonth() - n);
+    return currentDate;
 }

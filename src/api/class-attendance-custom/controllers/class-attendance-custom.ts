@@ -15,11 +15,24 @@ export default {
       ctx.body = err;
     }
   },
-  currentAttendanc: async (ctx, next) => {
+  currentAttendance: async (ctx, next) => {
+    // Take the current user attandance based on time
     try {
       const data = await strapi
         .service("api::class-attendance-custom.class-attendance-custom")
         .currentAttendanceService(ctx);
+
+      ctx.body = data;
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
+  attendanceHistory: async (ctx, next) => {
+    // Personal Class Attendance History
+    try {
+      const data = await strapi
+        .service("api::class-attendance-custom.class-attendance-custom")
+        .attendanceHistoryService(ctx);
 
       ctx.body = data;
     } catch (err) {
