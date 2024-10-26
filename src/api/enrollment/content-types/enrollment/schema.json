@@ -1,0 +1,55 @@
+{
+  "kind": "collectionType",
+  "collectionName": "enrollments",
+  "info": {
+    "singularName": "enrollment",
+    "pluralName": "enrollments",
+    "displayName": "Enrollment"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "englishName": {
+      "type": "string",
+      "required": true
+    },
+    "chineseName": {
+      "type": "string"
+    },
+    "phoneNumber": {
+      "type": "biginteger",
+      "required": true
+    },
+    "birthYear": {
+      "type": "integer",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female"
+      ],
+      "required": true
+    },
+    "classDay": {
+      "type": "enumeration",
+      "enum": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "required": true
+    }
+  }
+}

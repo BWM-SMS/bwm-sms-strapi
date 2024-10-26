@@ -108,6 +108,49 @@
         "Female"
       ],
       "required": true
+    },
+    "joinYear": {
+      "type": "integer",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "acceptPDPA": {
+      "type": "boolean",
+      "required": false
+    },
+    "localization": {
+      "type": "enumeration",
+      "enum": [
+        "English",
+        "Chinese (中文)"
+      ],
+      "default": "English",
+      "required": true
+    },
+    "hobby": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Reading",
+        "Singing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "skill": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "IT",
+        "Drawing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }

@@ -3,7 +3,7 @@
  */
 
 
-const { createCoreService } = require('@strapi/strapi').factories;
+const { createCoreService: createCoreServiceClass } = require('@strapi/strapi').factories;
 
 module.exports = {
     async findAllBlogs(ctx) {
