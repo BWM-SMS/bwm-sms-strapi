@@ -47,6 +47,9 @@
     },
     "note": {
       "type": "text"
+    },
+    "endDate": {
+      "type": "date"
     }
   }
 }
