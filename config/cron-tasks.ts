@@ -10,7 +10,7 @@ export default {
             }
         },
         options: {
-            rule: "0 0 * * * *",
+            rule: "0 0 * * 1",
             tz: "Asia/Singapore"
         }
     },

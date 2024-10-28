@@ -399,6 +399,17 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     > &
       Schema.Attribute.Private;
     note: Schema.Attribute.Text;
+    position: Schema.Attribute.Enumeration<
+      [
+        'A. \u73ED\u957F',
+        'B. \u526F\u73ED\u957F',
+        'C. \u5173\u6000\u5458',
+        'D. \u5B66\u5458',
+        'E. \u65C1\u542C',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'D. \u5B66\u5458'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
@@ -496,12 +507,16 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     language: Schema.Attribute.Enumeration<
       ['C: \u534E\u6587', 'B: \u53CC\u8BED']
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::class.class'> &
       Schema.Attribute.Private;
+    previousClass: Schema.Attribute.Relation<'oneToOne', 'api::class.class'>;
     publishedAt: Schema.Attribute.DateTime;
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
@@ -619,6 +634,9 @@ export interface ApiSusFeedbackSusFeedback extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    improvementModule: Schema.Attribute.Enumeration<
+      ['Self Attendance', 'Attendance History', 'Profile', 'Login']
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

@@ -63,6 +63,16 @@
         "Friday",
         "Saturday"
       ]
+    },
+    "previousClass": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::class.class"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     }
   }
 }

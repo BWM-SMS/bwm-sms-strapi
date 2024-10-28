@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-26T09:39:33.980Z"
+    "x-generation-date": "2024-10-28T09:46:23.548Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4856,6 +4856,9 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "isActive"
+            ],
             "type": "object",
             "properties": {
               "className": {
@@ -4929,6 +4932,20 @@
                   "Saturday"
                 ]
               },
+              "previousClass": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
+              "isActive": {
+                "type": "boolean"
+              },
               "locale": {
                 "type": "string"
               },
@@ -4987,6 +5004,9 @@
       },
       "Class": {
         "type": "object",
+        "required": [
+          "isActive"
+        ],
         "properties": {
           "id": {
             "type": "number"
@@ -5600,6 +5620,20 @@
                                       "Saturday"
                                     ]
                                   },
+                                  "previousClass": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
+                                  "isActive": {
+                                    "type": "boolean"
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -5766,6 +5800,16 @@
                           },
                           "rating": {
                             "type": "integer"
+                          },
+                          "position": {
+                            "type": "string",
+                            "enum": [
+                              "A. 班长",
+                              "B. 副班长",
+                              "C. 关怀员",
+                              "D. 学员",
+                              "E. 旁听"
+                            ]
                           },
                           "createdAt": {
                             "type": "string",
@@ -6262,6 +6306,15 @@
                             "type": "number",
                             "format": "float"
                           },
+                          "improvementModule": {
+                            "type": "string",
+                            "enum": [
+                              "Self Attendance",
+                              "Attendance History",
+                              "Profile",
+                              "Login"
+                            ]
+                          },
                           "createdAt": {
                             "type": "string",
                             "format": "date-time"
@@ -6487,6 +6540,20 @@
               "Friday",
               "Saturday"
             ]
+          },
+          "previousClass": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
+          },
+          "isActive": {
+            "type": "boolean"
           },
           "createdAt": {
             "type": "string",
@@ -7358,6 +7425,16 @@
                               "rating": {
                                 "type": "integer"
                               },
+                              "position": {
+                                "type": "string",
+                                "enum": [
+                                  "A. 班长",
+                                  "B. 副班长",
+                                  "C. 关怀员",
+                                  "D. 学员",
+                                  "E. 旁听"
+                                ]
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -7853,6 +7930,15 @@
                                 "type": "number",
                                 "format": "float"
                               },
+                              "improvementModule": {
+                                "type": "string",
+                                "enum": [
+                                  "Self Attendance",
+                                  "Attendance History",
+                                  "Profile",
+                                  "Login"
+                                ]
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -8079,6 +8165,20 @@
                   "Saturday"
                 ]
               },
+              "previousClass": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "isActive": {
+                "type": "boolean"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -8245,7 +8345,8 @@
         "properties": {
           "data": {
             "required": [
-              "isAttend"
+              "isAttend",
+              "position"
             ],
             "type": "object",
             "properties": {
@@ -8279,6 +8380,16 @@
               },
               "rating": {
                 "type": "integer"
+              },
+              "position": {
+                "type": "string",
+                "enum": [
+                  "A. 班长",
+                  "B. 副班长",
+                  "C. 关怀员",
+                  "D. 学员",
+                  "E. 旁听"
+                ]
               },
               "locale": {
                 "type": "string"
@@ -8339,7 +8450,8 @@
       "ClassAttendanceDetail": {
         "type": "object",
         "required": [
-          "isAttend"
+          "isAttend",
+          "position"
         ],
         "properties": {
           "id": {
@@ -8914,6 +9026,16 @@
                                   "rating": {
                                     "type": "integer"
                                   },
+                                  "position": {
+                                    "type": "string",
+                                    "enum": [
+                                      "A. 班长",
+                                      "B. 副班长",
+                                      "C. 关怀员",
+                                      "D. 学员",
+                                      "E. 旁听"
+                                    ]
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -9409,6 +9531,15 @@
                                     "type": "number",
                                     "format": "float"
                                   },
+                                  "improvementModule": {
+                                    "type": "string",
+                                    "enum": [
+                                      "Self Attendance",
+                                      "Attendance History",
+                                      "Profile",
+                                      "Login"
+                                    ]
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -9635,6 +9766,20 @@
                       "Saturday"
                     ]
                   },
+                  "previousClass": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "documentId": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "isActive": {
+                    "type": "boolean"
+                  },
                   "createdAt": {
                     "type": "string",
                     "format": "date-time"
@@ -9801,6 +9946,16 @@
           },
           "rating": {
             "type": "integer"
+          },
+          "position": {
+            "type": "string",
+            "enum": [
+              "A. 班长",
+              "B. 副班长",
+              "C. 关怀员",
+              "D. 学员",
+              "E. 旁听"
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -10976,6 +11131,15 @@
                 "type": "number",
                 "format": "float"
               },
+              "improvementModule": {
+                "type": "string",
+                "enum": [
+                  "Self Attendance",
+                  "Attendance History",
+                  "Profile",
+                  "Login"
+                ]
+              },
               "locale": {
                 "type": "string"
               },
@@ -11718,6 +11882,20 @@
                                 "Saturday"
                               ]
                             },
+                            "previousClass": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "isActive": {
+                              "type": "boolean"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -11884,6 +12062,16 @@
                     },
                     "rating": {
                       "type": "integer"
+                    },
+                    "position": {
+                      "type": "string",
+                      "enum": [
+                        "A. 班长",
+                        "B. 副班长",
+                        "C. 关怀员",
+                        "D. 学员",
+                        "E. 旁听"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
@@ -12380,6 +12568,15 @@
                       "type": "number",
                       "format": "float"
                     },
+                    "improvementModule": {
+                      "type": "string",
+                      "enum": [
+                        "Self Attendance",
+                        "Attendance History",
+                        "Profile",
+                        "Login"
+                      ]
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -12523,6 +12720,15 @@
           "score": {
             "type": "number",
             "format": "float"
+          },
+          "improvementModule": {
+            "type": "string",
+            "enum": [
+              "Self Attendance",
+              "Attendance History",
+              "Profile",
+              "Login"
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -13383,6 +13589,20 @@
                                 "Saturday"
                               ]
                             },
+                            "previousClass": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "isActive": {
+                              "type": "boolean"
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -13549,6 +13769,16 @@
                     },
                     "rating": {
                       "type": "integer"
+                    },
+                    "position": {
+                      "type": "string",
+                      "enum": [
+                        "A. 班长",
+                        "B. 副班长",
+                        "C. 关怀员",
+                        "D. 学员",
+                        "E. 旁听"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
@@ -14044,6 +14274,15 @@
                     "score": {
                       "type": "number",
                       "format": "float"
+                    },
+                    "improvementModule": {
+                      "type": "string",
+                      "enum": [
+                        "Self Attendance",
+                        "Attendance History",
+                        "Profile",
+                        "Login"
+                      ]
                     },
                     "createdAt": {
                       "type": "string",
