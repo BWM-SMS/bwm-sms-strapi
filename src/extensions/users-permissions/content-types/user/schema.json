@@ -113,19 +113,51 @@
       "type": "integer",
       "required": true
     },
-    "hobby": {
-      "type": "enumeration",
-      "enum": [
-        "Reading",
-        "Singing"
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
       ]
     },
-    "skill": {
+    "acceptPDPA": {
+      "type": "boolean",
+      "required": false
+    },
+    "localization": {
       "type": "enumeration",
       "enum": [
+        "English",
+        "Chinese (中文)"
+      ],
+      "default": "English",
+      "required": true
+    },
+    "hobby": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Reading",
+        "Singing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "skill": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
         "IT",
         "Drawing"
-      ]
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "sus_feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sus-feedback.sus-feedback",
+      "private": true,
+      "mappedBy": "username"
     }
   }
 }

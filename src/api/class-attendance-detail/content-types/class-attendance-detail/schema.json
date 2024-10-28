@@ -26,7 +26,7 @@
     },
     "isAttend": {
       "type": "boolean",
-      "default": true,
+      "default": false,
       "required": true
     },
     "note": {
@@ -36,6 +36,18 @@
       "type": "integer",
       "max": 5,
       "min": 0
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "A. 班长",
+        "B. 副班长",
+        "C. 关怀员",
+        "D. 学员",
+        "E. 旁听"
+      ],
+      "default": "D. 学员",
+      "required": true
     }
   }
 }
