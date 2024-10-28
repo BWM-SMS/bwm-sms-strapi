@@ -49,7 +49,6 @@ module.exports = {
     },
     async createAttendanceAndDetails(classData) {
         try {
-
             const holidayData = await strapi
                 .service("api::class-attendance-custom.class-attendance-custom")
                 .getHolidaySchedule();
@@ -125,7 +124,6 @@ module.exports = {
             console.error("Error creating attendance and attendance details:", err);
             throw err;
         }
-
     },
     async currentAttendanceService(ctx) {
         try {
