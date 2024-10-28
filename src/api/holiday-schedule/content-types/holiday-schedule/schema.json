@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "holiday_schedules",
+  "info": {
+    "singularName": "holiday-schedule",
+    "pluralName": "holiday-schedules",
+    "displayName": "Holiday Schedule"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "Public Holiday",
+        "Monastery Holiday",
+        "Maintenance",
+        "Restricted Access"
+      ],
+      "required": true,
+      "default": "Public Holiday"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

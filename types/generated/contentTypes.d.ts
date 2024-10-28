@@ -619,6 +619,47 @@ export interface ApiEnrollmentEnrollment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiHolidayScheduleHolidaySchedule
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'holiday_schedules';
+  info: {
+    displayName: 'Holiday Schedule';
+    pluralName: 'holiday-schedules';
+    singularName: 'holiday-schedule';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holiday-schedule.holiday-schedule'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    notes: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      [
+        'Public Holiday',
+        'Monastery Holiday',
+        'Maintenance',
+        'Restricted Access',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Public Holiday'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiSusFeedbackSusFeedback extends Struct.CollectionTypeSchema {
   collectionName: 'sus_feedbacks';
   info: {
@@ -1374,6 +1415,7 @@ declare module '@strapi/strapi' {
       'api::class.class': ApiClassClass;
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
+      'api::holiday-schedule.holiday-schedule': ApiHolidayScheduleHolidaySchedule;
       'api::sus-feedback.sus-feedback': ApiSusFeedbackSusFeedback;
       'api::user-class.user-class': ApiUserClassUserClass;
       'plugin::content-releases.release': PluginContentReleasesRelease;

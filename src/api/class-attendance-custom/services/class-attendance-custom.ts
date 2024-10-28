@@ -2,6 +2,7 @@ import { mergeConfig } from 'vite';
 /**
  * class-attendance-custom service
  * https://docs.strapi.io/dev-docs/api/document-service#create
+ * https://docs.strapi.io/dev-docs/api/rest/interactive-query-builder
  * Note: Filter if its was a array, its required to use filters at the next level 
  */
 
@@ -48,11 +49,28 @@ module.exports = {
     },
     async createAttendanceAndDetails(classData) {
         try {
+
+            const holidayData = await strapi
+                .service("api::class-attendance-custom.class-attendance-custom")
+                .getHolidaySchedule();
+
             // Loop through each class in classData
             for (const classItem of classData) {
                 // Every Monday 12am, create all the attendance for the week
                 const currentDate: Date = new Date();
                 const classDate: Date = nextDateBasedDay(currentDate, classItem.classDay)
+
+                // Check if classDate matches any holiday date
+                const isHoliday = holidayData.some(holiday => {
+                    const holidayDate = new Date(holiday.date)
+                    return holidayDate.toDateString() === classDate.toDateString();
+                });
+
+                // If classDate is a holiday, skip the creation
+                if (isHoliday) {
+                    console.log(`Skipping class on ${classDate.toDateString()} due to holiday.`);
+                    continue;
+                }
 
                 // Step 1: Create an attendance record for each class
                 const attendance = await strapi.documents('api::class-attendance.class-attendance').create({
@@ -91,6 +109,24 @@ module.exports = {
         }
 
     },
+    async getHolidaySchedule() {
+        try {
+            const currentDate: Date = new Date(); // Monday
+            const nextWeek: Date = nextDateBasedDay(currentDate, "Sunday") // Until One Week
+
+            return await strapi.documents('api::holiday-schedule.holiday-schedule').findMany({
+                filters: {
+                    date: {
+                        $between: [currentDate, nextWeek]
+                    }
+                }
+            });
+        } catch (err) {
+            console.error("Error creating attendance and attendance details:", err);
+            throw err;
+        }
+
+    },
     async currentAttendanceService(ctx) {
         try {
             const user = ctx.state.user;
@@ -119,7 +155,7 @@ module.exports = {
                 },
                 populate: {
                     classAttendance: {
-                        fields: ["id", "type","date", "startTime", "endTime"],
+                        fields: ["id", "type", "date", "startTime", "endTime"],
                         populate: {
                             className: {
                                 fields: ["id", "className"]
