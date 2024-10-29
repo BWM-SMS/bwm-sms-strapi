@@ -1,4 +1,3 @@
-import { mergeConfig } from 'vite';
 /**
  * class-attendance-custom service
  * https://docs.strapi.io/dev-docs/api/document-service#create

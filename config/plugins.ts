@@ -1,5 +1,5 @@
-export default () => ({ env }) => ({
-    'import-export-entries': {
+export default ({ env }) => ({
+    'strapi-import-export': {
         enabled: true,
         config: {
             // See `Config` section.
@@ -10,7 +10,7 @@ export default () => ({ env }) => ({
         config: {
             provider: 'local',
             providerOptions: {
-                sizeLimit: 1000000, // Set size limit for uploads (in bytes)
+                sizeLimit: 3000000, // Set size limit for uploads (in bytes), Max 3 MB
             },
             actionOptions: {
                 upload: {
@@ -21,4 +21,23 @@ export default () => ({ env }) => ({
             },
         },
     },
+    'email': {
+        enabled: true,
+        config: {
+            provider: 'nodemailer',
+            providerOptions: {
+                host: env('SMTP_HOST', 'smtp.example.com'), // SMTP server host
+                port: env.int('SMTP_PORT', 587),            // SMTP server port
+                auth: {
+                    user: env('SMTP_USERNAME'),               // Your email username
+                    pass: env('SMTP_PASSWORD'),               // Your email password
+                },
+                // Other Nodemailer options can go here, such as `secure`, `tls`, etc.
+            },
+            settings: {
+                defaultFrom: env('EMAIL_FROM', 'no-reply@example.com'),
+                defaultReplyTo: env('EMAIL_REPLY_TO', 'support@example.com'),
+            },
+        }
+    }
 });
