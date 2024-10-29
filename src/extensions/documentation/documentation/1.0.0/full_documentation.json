@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-29T10:16:18.003Z"
+    "x-generation-date": "2024-10-29T14:54:31.828Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6748,7 +6748,7 @@
                       "type": "string",
                       "enum": [
                         "English",
-                        "Chinese (中文)"
+                        "Chinese"
                       ]
                     },
                     "hobby": {},
@@ -8372,7 +8372,7 @@
                           "type": "string",
                           "enum": [
                             "English",
-                            "Chinese (中文)"
+                            "Chinese"
                           ]
                         },
                         "hobby": {},
@@ -9973,7 +9973,7 @@
                               "type": "string",
                               "enum": [
                                 "English",
-                                "Chinese (中文)"
+                                "Chinese"
                               ]
                             },
                             "hobby": {},
@@ -13518,7 +13518,7 @@
                 "type": "string",
                 "enum": [
                   "English",
-                  "Chinese (中文)"
+                  "Chinese"
                 ]
               },
               "hobby": {},
@@ -15225,7 +15225,7 @@
                 "type": "string",
                 "enum": [
                   "English",
-                  "Chinese (中文)"
+                  "Chinese"
                 ]
               },
               "hobby": {},

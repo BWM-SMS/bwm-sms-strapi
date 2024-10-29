@@ -1335,9 +1335,7 @@ export interface PluginUsersPermissionsUser
     image: Schema.Attribute.Media<'images'>;
     joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localization: Schema.Attribute.Enumeration<
-      ['English', 'Chinese (\u4E2D\u6587)']
-    > &
+    localization: Schema.Attribute.Enumeration<['English', 'Chinese']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'English'>;
     localizations: Schema.Attribute.Relation<
