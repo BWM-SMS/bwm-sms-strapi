@@ -1,5 +1,5 @@
 /**
- * class-attendance-custom service
+ * class-attendance-student service
  * https://docs.strapi.io/dev-docs/api/document-service#create
  * https://docs.strapi.io/dev-docs/api/rest/interactive-query-builder
  * Note: Filter if its was a array, its required to use filters at the next level 
@@ -37,7 +37,7 @@ module.exports = {
             });
 
             const data = await strapi
-                .service("api::class-attendance-custom.class-attendance-custom")
+                .service("api::class-attendance-student.class-attendance-student")
                 .createAttendanceAndDetails(classData);
 
             return data;
@@ -49,7 +49,7 @@ module.exports = {
     async createAttendanceAndDetails(classData) {
         try {
             const holidayData = await strapi
-                .service("api::class-attendance-custom.class-attendance-custom")
+                .service("api::class-attendance-student.class-attendance-student")
                 .getHolidaySchedule();
 
             // Loop through each class in classData
@@ -235,7 +235,8 @@ function subtractDurationFromTime(timeString: string, durationMinutes: number): 
 }
 
 function getTimeString(date: Date): string {
-    return date.toTimeString().split(' ')[0];
+    const newDate = new Date(date); // Create a new Date object to avoid mutating the original
+    return newDate.toTimeString().split(' ')[0];
 }
 
 function getLastNMonthsDate(currentDate: Date, n: number): Date {
