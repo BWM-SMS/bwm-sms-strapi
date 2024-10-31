@@ -88,10 +88,10 @@ module.exports = {
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
             const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
 
-            let classData
+            let attendanceData
             if (paramAttendanceId == null) {
                 // Query all the attendance records
-                classData = await strapi.documents('api::class-attendance.class-attendance').findMany({
+                attendanceData = await strapi.documents('api::class-attendance.class-attendance').findMany({
                     filters: {
                         className: {
                             documentId: classId
@@ -109,7 +109,7 @@ module.exports = {
                     sort: "date:desc"
                 });
             } else {
-                classData = await strapi.documents('api::class-attendance.class-attendance').findOne({
+                attendanceData = await strapi.documents('api::class-attendance.class-attendance').findOne({
                     documentId: paramAttendanceId,
                     filters: {
                         className: {
@@ -135,14 +135,89 @@ module.exports = {
                 });
             }
 
-            return classData;
+            return attendanceData;
         } catch (err) {
             console.error('Error in recurring service:', err);
             throw err;
         }
     },
+    async classAttendanceHistoryByStudentService(ctx) {
+        try {
+            const { classId } = ctx.params;
 
+            const currentDate = new Date();
 
+            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
+
+            const attendanceData = await strapi.documents('api::user-class.user-class').findMany({
+                filters: {
+                    className: {
+                        documentId: classId,
+                    },
+                },
+                populate: {
+                    username: {
+                        fields: ["englishName", "chineseName"],
+                        populate: {
+                            classAttendanceDetails: {
+                                filters: {
+                                    classAttendance: {
+                                        className: {
+                                            documentId: classId,
+                                        },
+                                        date: {
+                                            $between: [lastDateHistory, currentDate]
+                                        },
+                                    }
+                                },
+                                fields: ["isAttend"]
+                            }
+                        }
+                    },
+                }
+            });
+            return attendanceData;
+        } catch (err) {
+            console.error('Error in recurring service:', err);
+            throw err;
+        }
+    },
+    async studentAttendanceHistoryService(ctx) {
+        try {
+            const { classId, studentId } = ctx.params;
+
+            const currentDate = new Date();
+
+            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
+
+            const attendanceData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
+                filters: {
+                    username: {
+                        documentId: studentId,
+                    },
+                    classAttendance: {
+                        className: {
+                            documentId: classId,
+                        },
+                        date: {
+                            $between: [lastDateHistory, currentDate]
+                        },
+                    }
+                },
+                populate: {
+                    classAttendance: {
+                        fields: ["date", "type", "lesson"],
+                    }
+                }
+            });
+            return attendanceData;
+        } catch (err) {
+            console.error('Error in recurring service:', err);
+            throw err;
+        }
+    },
 };
 
 function getWeekStartAndEndDate(currentDate: Date): { startDate: Date, endDate: Date } {

@@ -4,7 +4,7 @@
 
 export default {
   currentClass: async (ctx, next) => {
-    // Take the current user attandance based on time
+    // Current CLass based on ctx
     try {
       const user = ctx.state.user;
 
@@ -22,7 +22,7 @@ export default {
     }
   },
   currentClassAttendance: async (ctx, next) => {
-    // Take the current user attandance based on time
+    // Current Class Attendance based on 7 days
     try {
       const user = ctx.state.user;
       const { classId } = ctx.params;
@@ -45,7 +45,7 @@ export default {
     }
   },
   classAttendanceHistory: async (ctx, next) => {
-    // Take the current user attandance based on time
+    // Current Class Attendance based on 3 months
     try {
       const user = ctx.state.user;
       const { classId } = ctx.params;
@@ -67,4 +67,50 @@ export default {
       ctx.body = err;
     }
   },
+  classAttendanceHistoryByStudent: async (ctx, next) => { 
+    // Current Class Attendance based on 3 months by student
+    try {
+      const user = ctx.state.user;
+      const { classId } = ctx.params;
+      
+      if (!user) {
+        return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
+      }
+
+      if (!classId) {
+        return ctx.badRequest(null, [{ messages: [{ id: 'No class id' }] }]);
+      }
+
+      const data = await strapi
+        .service("api::class-attendance-cadre.class-attendance-cadre")
+        .classAttendanceHistoryByStudentService(ctx);
+
+      ctx.body = data;
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
+  studentAttendanceHistory: async (ctx, next) => {
+    // View Student Attendance based on 3 months by class
+    try {
+      const user = ctx.state.user;
+      const { classId } = ctx.params;
+      
+      if (!user) {
+        return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
+      }
+
+      if (!classId) {
+        return ctx.badRequest(null, [{ messages: [{ id: 'No class id' }] }]);
+      }
+
+      const data = await strapi
+        .service("api::class-attendance-cadre.class-attendance-cadre")
+        .studentAttendanceHistoryService(ctx);
+
+      ctx.body = data;
+    } catch (err) {
+      ctx.body = err;
+    }
+  }  
 };
