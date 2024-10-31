@@ -73,6 +73,23 @@
       "type": "boolean",
       "default": true,
       "required": true
+    },
+    "venue": {
+      "type": "enumeration",
+      "enum": [
+        "BWM",
+        "Citiraya"
+      ],
+      "required": true
+    },
+    "room": {
+      "type": "enumeration",
+      "enum": [
+        "BWM-301",
+        "BWM-302",
+        "BWM-303"
+      ],
+      "required": true
     }
   }
 }

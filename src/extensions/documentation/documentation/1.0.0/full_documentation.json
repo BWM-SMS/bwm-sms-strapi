@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-10-30T03:47:42.259Z"
+    "x-generation-date": "2024-10-31T07:23:03.723Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5363,7 +5363,9 @@
         "properties": {
           "data": {
             "required": [
-              "isActive"
+              "isActive",
+              "venue",
+              "room"
             ],
             "type": "object",
             "properties": {
@@ -5452,6 +5454,21 @@
               "isActive": {
                 "type": "boolean"
               },
+              "venue": {
+                "type": "string",
+                "enum": [
+                  "BWM",
+                  "Citiraya"
+                ]
+              },
+              "room": {
+                "type": "string",
+                "enum": [
+                  "BWM-301",
+                  "BWM-302",
+                  "BWM-303"
+                ]
+              },
               "locale": {
                 "type": "string"
               },
@@ -5511,7 +5528,9 @@
       "Class": {
         "type": "object",
         "required": [
-          "isActive"
+          "isActive",
+          "venue",
+          "room"
         ],
         "properties": {
           "id": {
@@ -6139,6 +6158,21 @@
                                   },
                                   "isActive": {
                                     "type": "boolean"
+                                  },
+                                  "venue": {
+                                    "type": "string",
+                                    "enum": [
+                                      "BWM",
+                                      "Citiraya"
+                                    ]
+                                  },
+                                  "room": {
+                                    "type": "string",
+                                    "enum": [
+                                      "BWM-301",
+                                      "BWM-302",
+                                      "BWM-303"
+                                    ]
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -7060,6 +7094,21 @@
           },
           "isActive": {
             "type": "boolean"
+          },
+          "venue": {
+            "type": "string",
+            "enum": [
+              "BWM",
+              "Citiraya"
+            ]
+          },
+          "room": {
+            "type": "string",
+            "enum": [
+              "BWM-301",
+              "BWM-302",
+              "BWM-303"
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -8685,6 +8734,21 @@
               "isActive": {
                 "type": "boolean"
               },
+              "venue": {
+                "type": "string",
+                "enum": [
+                  "BWM",
+                  "Citiraya"
+                ]
+              },
+              "room": {
+                "type": "string",
+                "enum": [
+                  "BWM-301",
+                  "BWM-302",
+                  "BWM-303"
+                ]
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -10285,6 +10349,21 @@
                   },
                   "isActive": {
                     "type": "boolean"
+                  },
+                  "venue": {
+                    "type": "string",
+                    "enum": [
+                      "BWM",
+                      "Citiraya"
+                    ]
+                  },
+                  "room": {
+                    "type": "string",
+                    "enum": [
+                      "BWM-301",
+                      "BWM-302",
+                      "BWM-303"
+                    ]
                   },
                   "createdAt": {
                     "type": "string",
@@ -12910,6 +12989,21 @@
                             "isActive": {
                               "type": "boolean"
                             },
+                            "venue": {
+                              "type": "string",
+                              "enum": [
+                                "BWM",
+                                "Citiraya"
+                              ]
+                            },
+                            "room": {
+                              "type": "string",
+                              "enum": [
+                                "BWM-301",
+                                "BWM-302",
+                                "BWM-303"
+                              ]
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -14616,6 +14710,21 @@
                             },
                             "isActive": {
                               "type": "boolean"
+                            },
+                            "venue": {
+                              "type": "string",
+                              "enum": [
+                                "BWM",
+                                "Citiraya"
+                              ]
+                            },
+                            "room": {
+                              "type": "string",
+                              "enum": [
+                                "BWM-301",
+                                "BWM-302",
+                                "BWM-303"
+                              ]
                             },
                             "createdAt": {
                               "type": "string",

@@ -518,6 +518,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     previousClass: Schema.Attribute.Relation<'oneToOne', 'api::class.class'>;
     publishedAt: Schema.Attribute.DateTime;
+    room: Schema.Attribute.Enumeration<['BWM-301', 'BWM-302', 'BWM-303']> &
+      Schema.Attribute.Required;
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
       [
@@ -534,6 +536,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-class.user-class'
     >;
+    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']> &
+      Schema.Attribute.Required;
   };
 }
 
