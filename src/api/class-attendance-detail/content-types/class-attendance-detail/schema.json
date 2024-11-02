@@ -48,6 +48,12 @@
       ],
       "default": "D. 学员",
       "required": true
+    },
+    "editedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "private": true
     }
   }
 }

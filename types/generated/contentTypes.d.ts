@@ -389,6 +389,11 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     isAttend: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -451,6 +456,11 @@ export interface ApiClassAttendanceClassAttendance
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     endTime: Schema.Attribute.Time & Schema.Attribute.Required;
     lesson: Schema.Attribute.Enumeration<
       ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
@@ -506,6 +516,11 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     classTime: Schema.Attribute.Time;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
       Schema.Attribute.Private;
     isActive: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
@@ -813,6 +828,11 @@ export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
     className: Schema.Attribute.Relation<'manyToOne', 'api::class.class'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
       Schema.Attribute.Private;
     endDate: Schema.Attribute.Date;
     isActive: Schema.Attribute.Boolean &

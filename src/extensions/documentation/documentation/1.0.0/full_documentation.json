@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-01T07:29:08.819Z"
+    "x-generation-date": "2024-11-01T08:50:28.107Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -5469,6 +5469,17 @@
                   "BWM-303"
                 ]
               },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
               "locale": {
                 "type": "string"
               },
@@ -6174,6 +6185,17 @@
                                       "BWM-303"
                                     ]
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -6268,6 +6290,17 @@
                                 "format": "time",
                                 "example": "12:54.000"
                               },
+                              "editedBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -6350,6 +6383,17 @@
                               "D. 学员",
                               "E. 旁听"
                             ]
+                          },
+                          "editedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "createdAt": {
                             "type": "string",
@@ -6997,6 +7041,17 @@
                   "type": "string",
                   "format": "date"
                 },
+                "editedBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -7109,6 +7164,17 @@
               "BWM-302",
               "BWM-303"
             ]
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -7244,6 +7310,17 @@
                 "type": "string",
                 "format": "time",
                 "example": "12:54.000"
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "locale": {
                 "type": "string"
@@ -7907,6 +7984,17 @@
                                     "format": "time",
                                     "example": "12:54.000"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -7989,6 +8077,17 @@
                                   "D. 学员",
                                   "E. 旁听"
                                 ]
+                              },
+                              "editedBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
                               },
                               "createdAt": {
                                 "type": "string",
@@ -8636,6 +8735,17 @@
                       "type": "string",
                       "format": "date"
                     },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -8749,6 +8859,17 @@
                   "BWM-303"
                 ]
               },
+              "editedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -8842,6 +8963,17 @@
             "type": "string",
             "format": "time",
             "example": "12:54.000"
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -8960,6 +9092,17 @@
                   "D. 学员",
                   "E. 旁听"
                 ]
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "locale": {
                 "type": "string"
@@ -9605,6 +9748,17 @@
                                       "D. 学员",
                                       "E. 旁听"
                                     ]
+                                  },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
                                   },
                                   "createdAt": {
                                     "type": "string",
@@ -10252,6 +10406,17 @@
                           "type": "string",
                           "format": "date"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -10365,6 +10530,17 @@
                       "BWM-303"
                     ]
                   },
+                  "editedBy": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "documentId": {
+                        "type": "string"
+                      }
+                    }
+                  },
                   "createdAt": {
                     "type": "string",
                     "format": "date-time"
@@ -10459,6 +10635,17 @@
                 "format": "time",
                 "example": "12:54.000"
               },
+              "editedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -10541,6 +10728,17 @@
               "D. 学员",
               "E. 旁听"
             ]
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -12891,6 +13089,17 @@
                                     "type": "string",
                                     "format": "date"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -13004,6 +13213,17 @@
                                 "BWM-303"
                               ]
                             },
+                            "editedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -13098,6 +13318,17 @@
                           "format": "time",
                           "example": "12:54.000"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -13180,6 +13411,17 @@
                         "D. 学员",
                         "E. 旁听"
                       ]
+                    },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
                     },
                     "createdAt": {
                       "type": "string",
@@ -13962,6 +14204,17 @@
                 "type": "string",
                 "format": "date"
               },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
               "locale": {
                 "type": "string"
               },
@@ -14613,6 +14866,17 @@
                                     "type": "string",
                                     "format": "date"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -14726,6 +14990,17 @@
                                 "BWM-303"
                               ]
                             },
+                            "editedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -14820,6 +15095,17 @@
                           "format": "time",
                           "example": "12:54.000"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -14902,6 +15188,17 @@
                         "D. 学员",
                         "E. 旁听"
                       ]
+                    },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
                     },
                     "createdAt": {
                       "type": "string",
@@ -15548,6 +15845,17 @@
           "endDate": {
             "type": "string",
             "format": "date"
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
