@@ -1,6 +1,7 @@
 /**
  * https://docs.strapi.io/dev-docs/backend-customization/models#available-lifecycle-events
  */
+import { Encryption } from '../../../../utils/encryption';
 
 export default {
     async beforeCreate(event) {
@@ -37,5 +38,49 @@ export default {
 
         // Generate the username
         data.username = `${countryPrefix}${year}${incrementStr}`;
+
+        if (data.phoneNumber) {
+            data.phoneNumber = Encryption.encrypt(data.phoneNumber);
+        }
+
+        if (data.email) {
+            data.email = Encryption.encrypt(data.email);
+        }
+    },
+    async beforeUpdate(event) {
+        const { data } = event.params;
+        if(data){
+            if (data.phoneNumber) {
+                data.phoneNumber = Encryption.encrypt(data.phoneNumber);
+            }
+    
+            if (data.email) {
+                data.email = Encryption.encrypt(data.email);
+            }
+        }
+    },
+    async afterFindOne(event) {
+        const { result } = event;
+        if (result) {
+            if (result.phoneNumber) {
+                result.phoneNumber = Encryption.decrypt(result.phoneNumber);
+            }
+
+            if (result.email) {
+                result.email = Encryption.decrypt(result.email);
+            }
+        }
+    },
+    async afterFindMany(event) {
+        const { result } = event;
+        result.forEach(result => {
+            if (result.phoneNumber) {
+                result.phoneNumber = Encryption.decrypt(result.phoneNumber);
+            }
+
+            if (result.email) {
+                result.email = Encryption.decrypt(result.email);
+            }
+        });
     }
 };

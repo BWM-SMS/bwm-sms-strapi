@@ -7,6 +7,8 @@
 
 
 const { createCoreService: createCoreServiceAttendance } = require('@strapi/strapi').factories;
+import { DateTime } from "../../../utils/datetime";
+import { URL_Request } from "../../../utils/url-request";
 
 module.exports = {
     async recurringService() {
@@ -55,8 +57,8 @@ module.exports = {
             // Loop through each class in classData
             for (const classItem of classData) {
                 // Every Monday 12am, create all the attendance for the week
-                const currentDate: Date = new Date();
-                const classDate: Date = nextDateBasedDay(currentDate, classItem.classDay)
+                const currentDate: Date = new Date(" Oct 28 2024 00:16:23 GMT+0800");
+                const classDate: Date = DateTime.nextDateBasedDay(currentDate, classItem.classDay)
 
                 // Check if classDate matches any holiday date
                 const isHoliday = holidayData.some(holiday => {
@@ -76,8 +78,9 @@ module.exports = {
                         date: classDate, // Set the date for the attendance
                         className: classItem.documentId, // Reference to the class
                         startTime: classItem.classTime, // Set the start time for the class
-                        endTime: addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
+                        endTime: DateTime.addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
                         type: "A. 研讨班",
+                        updatedAt: currentDate,
                         updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                         createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin user
                     },
@@ -94,6 +97,7 @@ module.exports = {
                             username: userClass.username.documentId, // Reference to the user
                             position: userClass.position,
                             isAttend: false,
+                            updatedAt: currentDate,
                             updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                             createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin users
                         },
@@ -110,7 +114,7 @@ module.exports = {
     async getHolidaySchedule() {
         try {
             const currentDate: Date = new Date(); // Monday
-            const nextWeek: Date = nextDateBasedDay(currentDate, "Sunday") // Until One Week
+            const nextWeek: Date = DateTime.nextDateBasedDay(currentDate, "Sunday") // Until One Week
 
             return await strapi.documents('api::holiday-schedule.holiday-schedule').findMany({
                 filters: {
@@ -128,13 +132,13 @@ module.exports = {
         try {
             const user = ctx.state.user;
             const currentDate = new Date();
-            const currentTime = getTimeString(currentDate);
+            const currentTime = DateTime.getTimeString(currentDate);
 
             const openTakeAttendance = 60 // Replace to Strapi Configuration
             const closeTakeAttendance = 30 // Replace to Strapi Configuration
 
-            const openTakeTime = addDurationToTime(currentTime, openTakeAttendance);
-            const closeTakeTime = subtractDurationFromTime(currentTime, closeTakeAttendance);
+            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendance);
+            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendance);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
@@ -177,11 +181,11 @@ module.exports = {
             const user = ctx.state.user;
             const currentDate = new Date();
 
-            const paramType = getTypeFromUrl(ctx.request, 'type');
+            const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" } : { $eq: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" };
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
-            const lastDateHistory = getLastNMonthsDate(currentDate, lastNMonthHistory);
+            const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
@@ -210,53 +214,3 @@ module.exports = {
     }
 
 };
-
-function addDurationToTime(timeString: string, durationMinutes: number): string {
-    // Parse the time string into a Date object
-    const [hours, minutes, seconds] = timeString.split(':').map(Number);
-    const baseDate = new Date();
-    baseDate.setHours(hours, minutes, seconds, 0);
-
-    // Add the duration in minutes
-    const newTime = new Date(baseDate.getTime() + durationMinutes * 60000);
-
-    return getTimeString(newTime);
-}
-
-function subtractDurationFromTime(timeString: string, durationMinutes: number): string {
-    const [hours, minutes, seconds] = timeString.split(':').map(Number);
-    const baseDate = new Date();
-    baseDate.setHours(hours, minutes, seconds, 0);
-
-    // Subtract the duration in minutes
-    const newTime = new Date(baseDate.getTime() - durationMinutes * 60000);
-
-    return getTimeString(newTime);
-}
-
-function getTimeString(date: Date): string {
-    const newDate = new Date(date); // Create a new Date object to avoid mutating the original
-    return newDate.toTimeString().split(' ')[0];
-}
-
-function getLastNMonthsDate(currentDate: Date, n: number): Date {
-    const newDate = new Date(currentDate); // Create a new Date object to avoid mutating the original
-    newDate.setMonth(newDate.getMonth() - n);
-    return newDate;
-}
-
-function nextDateBasedDay(currentDate: Date, classDay: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday"): Date {
-    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-    const targetDayIndex = dayNames.indexOf(classDay);
-    const daysUntilNextClass = (targetDayIndex - currentDate.getDay() + 7) % 7;
-    const nextClassDate = new Date(currentDate);
-    nextClassDate.setDate(currentDate.getDate() + daysUntilNextClass); // Ensure it moves to the next week if the day is the same
-    return nextClassDate;
-}
-
-function getTypeFromUrl(ctx: any, param: string): string | null {
-    const fullUrl = ctx.host + ctx.url
-    const url = new URL(fullUrl, ctx.host); // Base URL is required for URL parsing
-    const params = new URLSearchParams(url.search);
-    return params.get(param);
-}

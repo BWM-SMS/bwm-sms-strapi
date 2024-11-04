@@ -7,6 +7,8 @@
 
 
 const { createCoreService: createCoreServiceAttendanceCadre } = require('@strapi/strapi').factories;
+import { DateTime } from "../../../utils/datetime";
+import { URL_Request } from "../../../utils/url-request";
 
 module.exports = {
     async currentClassService(ctx) {
@@ -44,7 +46,7 @@ module.exports = {
             const currentDate = new Date();
 
             // Getting this week start and end date
-            const { startDate, endDate } = getWeekStartAndEndDate(currentDate);
+            const { startDate, endDate } = DateTime.getWeekStartAndEndDate(currentDate);
 
             const attendanceData = await strapi.documents('api::class-attendance.class-attendance').findFirst({
                 filters: {
@@ -81,12 +83,12 @@ module.exports = {
             const { classId } = ctx.params;
             const currentDate = new Date();
 
-            const paramType = getTypeFromUrlCadre(ctx.request, 'type');
-            const paramAttendanceId = getTypeFromUrlCadre(ctx.request, 'attendanceId');
+            const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
+            const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
             const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" } : { $eq: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" };
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
-            const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
+            const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             let attendanceData
             if (paramAttendanceId == null) {
@@ -148,7 +150,7 @@ module.exports = {
             const currentDate = new Date();
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
-            const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
+            const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const attendanceData = await strapi.documents('api::user-class.user-class').findMany({
                 filters: {
@@ -190,7 +192,7 @@ module.exports = {
             const currentDate = new Date();
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
-            const lastDateHistory = getLastNMonthsDateCadre(currentDate, lastNMonthHistory);
+            const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const attendanceData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
@@ -219,32 +221,3 @@ module.exports = {
         }
     },
 };
-
-function getWeekStartAndEndDate(currentDate: Date): { startDate: Date, endDate: Date } {
-    const startDate = new Date(currentDate);
-    const endDate = new Date(currentDate);
-
-    // Set the start date to the previous Monday
-    startDate.setDate(currentDate.getDate() - (currentDate.getDay() + 6) % 7);
-
-    // Set the end date to the next Sunday
-    endDate.setDate(currentDate.getDate() + (7 - currentDate.getDay()) % 7);
-
-    return { startDate, endDate };
-}
-
-function getTypeFromUrlCadre(ctx: any, param: string): string | null {
-    // TODO: Same function logic as studentt due to duplicate function name from strapi, required to standarised into common function
-    const fullUrl = ctx.host + ctx.url
-    const url = new URL(fullUrl, ctx.host); // Base URL is required for URL parsing
-    const params = new URLSearchParams(url.search);
-    return params.get(param);
-}
-
-
-function getLastNMonthsDateCadre(currentDate: Date, n: number): Date {
-    // TODO: Same function logic as studentt due to duplicate function name from strapi, required to standarised into common function
-    const newDate = new Date(currentDate); // Create a new Date object to avoid mutating the original
-    newDate.setMonth(newDate.getMonth() - n);
-    return newDate;
-}
