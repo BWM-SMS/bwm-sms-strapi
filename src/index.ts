@@ -1,5 +1,6 @@
 import type { Core } from '@strapi/strapi';
 import lifecycles from './extensions/users-permissions/content-types/user/lifecycles';
+import { Encryption } from './utils/encryption';
 
 export default {
   /**
@@ -18,9 +19,13 @@ export default {
    * run jobs, or perform some special logic.
    */
   bootstrap({ strapi }: { strapi: Core.Strapi }) {
+    // Add the lifecycle hooks to the user model
     strapi.db.lifecycles.subscribe({
       models: ['plugin::users-permissions.user'],
       ...lifecycles,
     });
+
+    // Init Encryption model
+    Encryption.initEncryption()
   },
 };

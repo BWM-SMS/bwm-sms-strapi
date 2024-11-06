@@ -6,13 +6,13 @@
   "scripts": {
     "build": "strapi build",
     "deploy": "strapi deploy",
-    "develop": "strapi develop",
-    "start": "strapi start",
+    "start": "ts-node runStrapi.ts",
     "strapi": "strapi",
     "patch": "npx @strapi/upgrade patch",
     "minor": "npx @strapi/upgrade minor"
   },
   "dependencies": {
+    "@bitwarden/sdk-napi": "^1.0.0",
     "@strapi/email": "5.2.0",
     "@strapi/plugin-cloud": "5.2.0",
     "@strapi/plugin-documentation": "5.2.0",
@@ -31,6 +31,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   },
   "engines": {
