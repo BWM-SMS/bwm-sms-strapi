@@ -389,6 +389,11 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     isAttend: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -451,6 +456,11 @@ export interface ApiClassAttendanceClassAttendance
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     endTime: Schema.Attribute.Time & Schema.Attribute.Required;
     lesson: Schema.Attribute.Enumeration<
       ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
@@ -507,6 +517,11 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     isActive: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
@@ -518,6 +533,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     previousClass: Schema.Attribute.Relation<'oneToOne', 'api::class.class'>;
     publishedAt: Schema.Attribute.DateTime;
+    room: Schema.Attribute.Enumeration<['BWM-301', 'BWM-302', 'BWM-303']> &
+      Schema.Attribute.Required;
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
       [
@@ -534,6 +551,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-class.user-class'
     >;
+    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -809,6 +828,11 @@ export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
     className: Schema.Attribute.Relation<'manyToOne', 'api::class.class'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
       Schema.Attribute.Private;
     endDate: Schema.Attribute.Date;
     isActive: Schema.Attribute.Boolean &
@@ -1335,9 +1359,7 @@ export interface PluginUsersPermissionsUser
     image: Schema.Attribute.Media<'images'>;
     joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localization: Schema.Attribute.Enumeration<
-      ['English', 'Chinese (\u4E2D\u6587)']
-    > &
+    localization: Schema.Attribute.Enumeration<['English', 'Chinese']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'English'>;
     localizations: Schema.Attribute.Relation<

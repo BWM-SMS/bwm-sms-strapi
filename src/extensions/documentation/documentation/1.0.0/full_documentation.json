@@ -14,7 +14,11 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
+<<<<<<< HEAD
     "x-generation-date": "2024-10-28T16:02:35.714Z"
+=======
+    "x-generation-date": "2024-11-06T06:42:02.369Z"
+>>>>>>> develop
   },
   "x-strapi-config": {
     "plugins": [
@@ -24,7 +28,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:1337/api",
+      "url": "http://localhost:1338/api",
       "description": "Development server"
     }
   ],
@@ -5363,7 +5367,9 @@
         "properties": {
           "data": {
             "required": [
-              "isActive"
+              "isActive",
+              "venue",
+              "room"
             ],
             "type": "object",
             "properties": {
@@ -5452,6 +5458,32 @@
               "isActive": {
                 "type": "boolean"
               },
+              "venue": {
+                "type": "string",
+                "enum": [
+                  "BWM",
+                  "Citiraya"
+                ]
+              },
+              "room": {
+                "type": "string",
+                "enum": [
+                  "BWM-301",
+                  "BWM-302",
+                  "BWM-303"
+                ]
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
+              },
               "locale": {
                 "type": "string"
               },
@@ -5511,7 +5543,9 @@
       "Class": {
         "type": "object",
         "required": [
-          "isActive"
+          "isActive",
+          "venue",
+          "room"
         ],
         "properties": {
           "id": {
@@ -6140,6 +6174,32 @@
                                   "isActive": {
                                     "type": "boolean"
                                   },
+                                  "venue": {
+                                    "type": "string",
+                                    "enum": [
+                                      "BWM",
+                                      "Citiraya"
+                                    ]
+                                  },
+                                  "room": {
+                                    "type": "string",
+                                    "enum": [
+                                      "BWM-301",
+                                      "BWM-302",
+                                      "BWM-303"
+                                    ]
+                                  },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -6234,6 +6294,17 @@
                                 "format": "time",
                                 "example": "12:54.000"
                               },
+                              "editedBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
                               "createdAt": {
                                 "type": "string",
                                 "format": "date-time"
@@ -6316,6 +6387,17 @@
                               "D. 学员",
                               "E. 旁听"
                             ]
+                          },
+                          "editedBy": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "number"
+                              },
+                              "documentId": {
+                                "type": "string"
+                              }
+                            }
                           },
                           "createdAt": {
                             "type": "string",
@@ -6748,7 +6830,7 @@
                       "type": "string",
                       "enum": [
                         "English",
-                        "Chinese (中文)"
+                        "Chinese"
                       ]
                     },
                     "hobby": {},
@@ -6963,6 +7045,17 @@
                   "type": "string",
                   "format": "date"
                 },
+                "editedBy": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number"
+                    },
+                    "documentId": {
+                      "type": "string"
+                    }
+                  }
+                },
                 "createdAt": {
                   "type": "string",
                   "format": "date-time"
@@ -7060,6 +7153,32 @@
           },
           "isActive": {
             "type": "boolean"
+          },
+          "venue": {
+            "type": "string",
+            "enum": [
+              "BWM",
+              "Citiraya"
+            ]
+          },
+          "room": {
+            "type": "string",
+            "enum": [
+              "BWM-301",
+              "BWM-302",
+              "BWM-303"
+            ]
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -7195,6 +7314,17 @@
                 "type": "string",
                 "format": "time",
                 "example": "12:54.000"
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "locale": {
                 "type": "string"
@@ -7858,6 +7988,17 @@
                                     "format": "time",
                                     "example": "12:54.000"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -7940,6 +8081,17 @@
                                   "D. 学员",
                                   "E. 旁听"
                                 ]
+                              },
+                              "editedBy": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "number"
+                                  },
+                                  "documentId": {
+                                    "type": "string"
+                                  }
+                                }
                               },
                               "createdAt": {
                                 "type": "string",
@@ -8372,7 +8524,7 @@
                           "type": "string",
                           "enum": [
                             "English",
-                            "Chinese (中文)"
+                            "Chinese"
                           ]
                         },
                         "hobby": {},
@@ -8587,6 +8739,17 @@
                       "type": "string",
                       "format": "date"
                     },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
+                    },
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -8685,6 +8848,32 @@
               "isActive": {
                 "type": "boolean"
               },
+              "venue": {
+                "type": "string",
+                "enum": [
+                  "BWM",
+                  "Citiraya"
+                ]
+              },
+              "room": {
+                "type": "string",
+                "enum": [
+                  "BWM-301",
+                  "BWM-302",
+                  "BWM-303"
+                ]
+              },
+              "editedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -8778,6 +8967,17 @@
             "type": "string",
             "format": "time",
             "example": "12:54.000"
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -8896,6 +9096,17 @@
                   "D. 学员",
                   "E. 旁听"
                 ]
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "locale": {
                 "type": "string"
@@ -9542,6 +9753,17 @@
                                       "E. 旁听"
                                     ]
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -9973,7 +10195,7 @@
                               "type": "string",
                               "enum": [
                                 "English",
-                                "Chinese (中文)"
+                                "Chinese"
                               ]
                             },
                             "hobby": {},
@@ -10188,6 +10410,17 @@
                           "type": "string",
                           "format": "date"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -10286,6 +10519,32 @@
                   "isActive": {
                     "type": "boolean"
                   },
+                  "venue": {
+                    "type": "string",
+                    "enum": [
+                      "BWM",
+                      "Citiraya"
+                    ]
+                  },
+                  "room": {
+                    "type": "string",
+                    "enum": [
+                      "BWM-301",
+                      "BWM-302",
+                      "BWM-303"
+                    ]
+                  },
+                  "editedBy": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number"
+                      },
+                      "documentId": {
+                        "type": "string"
+                      }
+                    }
+                  },
                   "createdAt": {
                     "type": "string",
                     "format": "date-time"
@@ -10380,6 +10639,17 @@
                 "format": "time",
                 "example": "12:54.000"
               },
+              "editedBy": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "number"
+                  },
+                  "documentId": {
+                    "type": "string"
+                  }
+                }
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -10462,6 +10732,17 @@
               "D. 学员",
               "E. 旁听"
             ]
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",
@@ -12812,6 +13093,17 @@
                                     "type": "string",
                                     "format": "date"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -12910,6 +13202,32 @@
                             "isActive": {
                               "type": "boolean"
                             },
+                            "venue": {
+                              "type": "string",
+                              "enum": [
+                                "BWM",
+                                "Citiraya"
+                              ]
+                            },
+                            "room": {
+                              "type": "string",
+                              "enum": [
+                                "BWM-301",
+                                "BWM-302",
+                                "BWM-303"
+                              ]
+                            },
+                            "editedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -13004,6 +13322,17 @@
                           "format": "time",
                           "example": "12:54.000"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -13086,6 +13415,17 @@
                         "D. 学员",
                         "E. 旁听"
                       ]
+                    },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
                     },
                     "createdAt": {
                       "type": "string",
@@ -13518,7 +13858,7 @@
                 "type": "string",
                 "enum": [
                   "English",
-                  "Chinese (中文)"
+                  "Chinese"
                 ]
               },
               "hobby": {},
@@ -13867,6 +14207,17 @@
               "endDate": {
                 "type": "string",
                 "format": "date"
+              },
+              "editedBy": {
+                "oneOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ],
+                "example": "string or id"
               },
               "locale": {
                 "type": "string"
@@ -14519,6 +14870,17 @@
                                     "type": "string",
                                     "format": "date"
                                   },
+                                  "editedBy": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "number"
+                                      },
+                                      "documentId": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  },
                                   "createdAt": {
                                     "type": "string",
                                     "format": "date-time"
@@ -14617,6 +14979,32 @@
                             "isActive": {
                               "type": "boolean"
                             },
+                            "venue": {
+                              "type": "string",
+                              "enum": [
+                                "BWM",
+                                "Citiraya"
+                              ]
+                            },
+                            "room": {
+                              "type": "string",
+                              "enum": [
+                                "BWM-301",
+                                "BWM-302",
+                                "BWM-303"
+                              ]
+                            },
+                            "editedBy": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "number"
+                                },
+                                "documentId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -14711,6 +15099,17 @@
                           "format": "time",
                           "example": "12:54.000"
                         },
+                        "editedBy": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "number"
+                            },
+                            "documentId": {
+                              "type": "string"
+                            }
+                          }
+                        },
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -14793,6 +15192,17 @@
                         "D. 学员",
                         "E. 旁听"
                       ]
+                    },
+                    "editedBy": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "number"
+                        },
+                        "documentId": {
+                          "type": "string"
+                        }
+                      }
                     },
                     "createdAt": {
                       "type": "string",
@@ -15225,7 +15635,7 @@
                 "type": "string",
                 "enum": [
                   "English",
-                  "Chinese (中文)"
+                  "Chinese"
                 ]
               },
               "hobby": {},
@@ -15439,6 +15849,17 @@
           "endDate": {
             "type": "string",
             "format": "date"
+          },
+          "editedBy": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           },
           "createdAt": {
             "type": "string",

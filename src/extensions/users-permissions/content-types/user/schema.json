@@ -129,7 +129,7 @@
       "type": "enumeration",
       "enum": [
         "English",
-        "Chinese (中文)"
+        "Chinese"
       ],
       "default": "English",
       "required": true
