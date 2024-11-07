@@ -57,7 +57,7 @@ module.exports = {
             // Loop through each class in classData
             for (const classItem of classData) {
                 // Every Monday 12am, create all the attendance for the week
-                const currentDate: Date = new Date(" Oct 28 2024 00:16:23 GMT+0800");
+                const currentDate: Date = new Date();
                 const classDate: Date = DateTime.nextDateBasedDay(currentDate, classItem.classDay)
 
                 // Check if classDate matches any holiday date
@@ -80,9 +80,8 @@ module.exports = {
                         startTime: classItem.classTime, // Set the start time for the class
                         endTime: DateTime.addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
                         type: "A. 研讨班",
-                        updatedAt: currentDate,
-                        updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
-                        createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin user
+                        updatedBy: "2", // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin user
+                        createdBy: "2" // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin user
                     },
                 });
 
@@ -97,9 +96,8 @@ module.exports = {
                             username: userClass.username.documentId, // Reference to the user
                             position: userClass.position,
                             isAttend: false,
-                            updatedAt: currentDate,
-                            updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
-                            createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin users
+                            updatedBy: "2", // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin user
+                            createdBy: "2" // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin users
                         },
                     });
                 }
