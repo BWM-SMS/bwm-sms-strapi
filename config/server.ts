@@ -10,4 +10,5 @@ export default ({ env }) => ({
     enabled: true,
     tasks: cronTasks,
   },
+  url: env('PUBLIC_URL', 'http://localhost:1337'),
 });

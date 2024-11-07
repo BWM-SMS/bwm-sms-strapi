@@ -34,7 +34,7 @@ module.exports = {
 
             return classData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in class service:', err);
             throw err;
         }
     },
@@ -73,7 +73,7 @@ module.exports = {
             });
             return attendanceData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in attendance service:', err);
             throw err;
         }
     },
@@ -139,7 +139,7 @@ module.exports = {
 
             return attendanceData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in attendance history service:', err);
             throw err;
         }
     },
@@ -181,7 +181,7 @@ module.exports = {
             });
             return attendanceData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in attendance history by class service:', err);
             throw err;
         }
     },
@@ -216,7 +216,7 @@ module.exports = {
             });
             return attendanceData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in class attendance history by student service:', err);
             throw err;
         }
     },
