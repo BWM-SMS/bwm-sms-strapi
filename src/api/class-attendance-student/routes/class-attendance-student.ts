@@ -12,7 +12,7 @@ export default {
      },
      {
       method: 'GET',
-      path: '/class-attendance/history',
+      path: '/class-attendance/history/student',
       handler: 'class-attendance-student.attendanceHistory',
      },
   ],
