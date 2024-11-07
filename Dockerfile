@@ -30,6 +30,7 @@ FROM --platform=linux/amd64 node:20.12
 # Set environment variable for Node environment
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
+ENV TZ="Asia/Singapore"
 
 # Set working directory
 WORKDIR /opt/
