@@ -31,27 +31,6 @@
         "B: 双语"
       ]
     },
-    "classTime": {
-      "type": "time"
-    },
-    "classDuration": {
-      "type": "integer"
-    },
-    "userClasses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-class.user-class",
-      "mappedBy": "className"
-    },
-    "classAttendances": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::class-attendance.class-attendance",
-      "mappedBy": "className"
-    },
-    "startDate": {
-      "type": "date"
-    },
     "classDay": {
       "type": "enumeration",
       "enum": [
@@ -64,15 +43,14 @@
         "Saturday"
       ]
     },
-    "previousClass": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::class.class"
+    "classTime": {
+      "type": "time"
     },
-    "isActive": {
-      "type": "boolean",
-      "default": true,
-      "required": true
+    "classDuration": {
+      "type": "integer"
+    },
+    "startDate": {
+      "type": "date"
     },
     "venue": {
       "type": "enumeration",
@@ -91,11 +69,33 @@
       ],
       "required": true
     },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
     "editedBy": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "private": true
+    },
+    "previousClass": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::class.class"
+    },
+    "userClasses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-class.user-class",
+      "mappedBy": "className"
+    },
+    "classAttendances": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-attendance.class-attendance",
+      "mappedBy": "className"
     }
   }
 }
