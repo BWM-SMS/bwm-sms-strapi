@@ -1,4 +1,4 @@
-import { BitwardenClient, ClientSettings, DeviceType, ResponseForSecretIdentifiersResponse, ResponseForSecretResponse, SecretIdentifiersResponse, SecretResponse } from "@bitwarden/sdk-napi";
+import { BitwardenClient, ClientSettings, DeviceType, SecretIdentifiersResponse, SecretResponse } from "@bitwarden/sdk-napi";
 import { LogLevel } from "@bitwarden/sdk-napi/binding";
 
 export class SecretsManager {

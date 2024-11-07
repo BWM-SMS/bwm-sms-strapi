@@ -1,0 +1,38 @@
+FROM node:18-alpine3.18
+
+# Installing libvips-dev for sharp Compatibility
+RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev nasm bash vips-dev git
+
+ARG NODE_ENV=development
+ENV NODE_ENV=${NODE_ENV}
+
+WORKDIR /opt/
+
+# Copy package.json and package-lock.json
+COPY package.json package-lock.json ./
+
+# Install npm and other global dependencies
+RUN npm install -g npm@10.9.0
+RUN npm add pg
+RUN npm install -g node-gyp
+
+# Install project dependencies
+RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install
+
+ENV PATH=/opt/node_modules/.bin:$PATH
+
+WORKDIR /opt/app
+
+# Copy the rest of the application files, excluding node_modules
+COPY . .
+
+# Set permissions and user
+RUN chown -R node:node /opt/app
+USER node
+
+# Build the application, the below code is meant for local staging env
+RUN ["npm", "run", "build"]
+
+# Expose the necessary port and set the command to run the application
+EXPOSE 1337
+CMD ["npm", "run", "develop"]

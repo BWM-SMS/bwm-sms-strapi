@@ -1,6 +1,6 @@
 import { SecretsManager } from './src/utils/secret-manager';
 import 'dotenv/config'
-const { spawn } = require('child_process');
+import { spawn } from 'child_process';
 
 async function initSecrets() {
   const secretManager = new SecretsManager();
