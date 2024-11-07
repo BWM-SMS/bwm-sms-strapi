@@ -7,13 +7,13 @@ export default {
     },
     {
       method: 'GET',
-      path: '/class-attendance/history',
-      handler: 'class-attendance-student.attendanceHistory',
+      path: '/class-attendance/current',
+      handler: 'class-attendance-student.currentAttendance',
     },
     {
       method: 'GET',
-      path: '/class-attendance/current',
-      handler: 'class-attendance-student.currentAttendance',
-    }
-  ]
+      path: '/class-attendance/past',
+      handler: 'class-attendance-student.attendanceHistory',
+    },
+  ],
 };

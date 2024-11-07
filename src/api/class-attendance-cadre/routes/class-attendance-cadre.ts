@@ -12,7 +12,7 @@ export default {
     },
     {
       method: 'GET',
-      path: '/class-attendance/history/cadre/:classId',
+      path: '/class-attendance/past/cadre/:classId',
       handler: 'class-attendance-cadre.classAttendanceHistory',
     },
     {
