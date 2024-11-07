@@ -1,12 +1,5 @@
-# ./Dockerfile.prod
-
-# Creating multi-stage build for production
-
 # Stage 1: Build Stage
-FROM node:18-alpine as build
-
-# Update package index and install necessary build tools and dependencies
-RUN apk update && apk add --no-cache build-base gcc autoconf automake zlib-dev libpng-dev vips-dev git > /dev/null 2>&1
+FROM --platform=linux/amd64 node:20.12 as build
 
 # Set environment variable for Node environment
 ARG NODE_ENV=production
@@ -17,9 +10,7 @@ WORKDIR /opt/
 
 # Copy package files and install dependencies
 COPY package.json package-lock.json ./
-RUN npm install -g node-gyp
-RUN npm add pg
-RUN npm config set fetch-retry-maxtimeout 600000 -g && npm install --only=production
+RUN npm install --only=production
 
 # Add node_modules binaries to PATH
 ENV PATH=/opt/node_modules/.bin:$PATH
@@ -29,16 +20,12 @@ WORKDIR /opt/app
 
 # Copy application source code
 COPY . .
-RUN npm run build
 
 # Build the application
 RUN npm run build
 
 # Stage 2: Production Stage
-FROM node:18-alpine
-
-# Install runtime dependencies
-RUN apk add --no-cache vips-dev
+FROM --platform=linux/amd64 node:20.12
 
 # Set environment variable for Node environment
 ARG NODE_ENV=production
@@ -69,4 +56,4 @@ USER node
 EXPOSE 1337
 
 # Command to run the application
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
