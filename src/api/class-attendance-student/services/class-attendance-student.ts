@@ -1,37 +1,45 @@
 /**
- * class-attendance-custom service
+ * class-attendance-student service
  * https://docs.strapi.io/dev-docs/api/document-service#create
+ * https://docs.strapi.io/dev-docs/api/rest/interactive-query-builder
+ * Note: Filter if its was a array, its required to use filters at the next level 
  */
 
 
 const { createCoreService: createCoreServiceAttendance } = require('@strapi/strapi').factories;
+import { DateTime } from "../../../utils/datetime";
+import { URL_Request } from "../../../utils/url-request";
 
 module.exports = {
     async recurringService() {
         try {
-            const currentDate = new Date();
-            const currentDay = currentDate.getDay();
-            const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const currentDayName: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" = dayNames[currentDay] as "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
+            // Reccuring Daily at 12am; Now change to every Monday 12am to create all the attendance for the week
+            // const currentDate = new Date();
+            // const currentDay = currentDate.getDay();
+            // const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            // const currentDayName: "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" = dayNames[currentDay] as "Sunday" | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday";
 
             const classData = await strapi.documents('api::class.class').findMany({
                 filters: {
-                    classDay: currentDayName
+                    isActive: true,
                 },
                 populate: {
                     userClasses: {
-                        fields: ["id"],
+                        fields: ["position"],
                         populate: {
                             username: {
-                                fields: ['username']
+                                fields: ["username"]
                             }
+                        },
+                        filters: {
+                            isActive: true
                         }
                     }
                 }
             });
 
             const data = await strapi
-                .service("api::class-attendance-custom.class-attendance-custom")
+                .service("api::class-attendance-student.class-attendance-student")
                 .createAttendanceAndDetails(classData);
 
             return data;
@@ -42,17 +50,37 @@ module.exports = {
     },
     async createAttendanceAndDetails(classData) {
         try {
+            const holidayData = await strapi
+                .service("api::class-attendance-student.class-attendance-student")
+                .getHolidaySchedule();
+
             // Loop through each class in classData
             for (const classItem of classData) {
+                // Every Monday 12am, create all the attendance for the week
+                const currentDate: Date = new Date(" Oct 28 2024 00:16:23 GMT+0800");
+                const classDate: Date = DateTime.nextDateBasedDay(currentDate, classItem.classDay)
+
+                // Check if classDate matches any holiday date
+                const isHoliday = holidayData.some(holiday => {
+                    const holidayDate = new Date(holiday.date)
+                    return holidayDate.toDateString() === classDate.toDateString();
+                });
+
+                // If classDate is a holiday, skip the creation
+                if (isHoliday) {
+                    console.log(`Skipping class on ${classDate.toDateString()} due to holiday.`);
+                    continue;
+                }
 
                 // Step 1: Create an attendance record for each class
                 const attendance = await strapi.documents('api::class-attendance.class-attendance').create({
                     data: {
-                        date: new Date(), // Set the date for the attendance
+                        date: classDate, // Set the date for the attendance
                         className: classItem.documentId, // Reference to the class
                         startTime: classItem.classTime, // Set the start time for the class
-                        endTime: addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
+                        endTime: DateTime.addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
                         type: "A. 研讨班",
+                        updatedAt: currentDate,
                         updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                         createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin user
                     },
@@ -67,7 +95,9 @@ module.exports = {
                         data: {
                             classAttendance: attendanceId, // Reference to the attendance record
                             username: userClass.username.documentId, // Reference to the user
+                            position: userClass.position,
                             isAttend: false,
+                            updatedAt: currentDate,
                             updatedBy: "1", // By default, set the updatedBy and createdAt fields to the ID of the admin user
                             createdBy: "1" // By default, set the updatedBy and createdAt fields to the ID of the admin users
                         },
@@ -81,17 +111,34 @@ module.exports = {
         }
 
     },
+    async getHolidaySchedule() {
+        try {
+            const currentDate: Date = new Date(); // Monday
+            const nextWeek: Date = DateTime.nextDateBasedDay(currentDate, "Sunday") // Until One Week
+
+            return await strapi.documents('api::holiday-schedule.holiday-schedule').findMany({
+                filters: {
+                    date: {
+                        $between: [currentDate, nextWeek]
+                    }
+                }
+            });
+        } catch (err) {
+            console.error("Error creating attendance and attendance details:", err);
+            throw err;
+        }
+    },
     async currentAttendanceService(ctx) {
         try {
             const user = ctx.state.user;
             const currentDate = new Date();
-            const currentTime = getTimeString(currentDate);
+            const currentTime = DateTime.getTimeString(currentDate);
 
             const openTakeAttendance = 60 // Replace to Strapi Configuration
             const closeTakeAttendance = 30 // Replace to Strapi Configuration
 
-            const openTakeTime = addDurationToTime(currentTime, openTakeAttendance);
-            const closeTakeTime = subtractDurationFromTime(currentTime, closeTakeAttendance);
+            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendance);
+            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendance);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
@@ -105,11 +152,11 @@ module.exports = {
                         endTime: {
                             $gte: closeTakeTime
                         }
-                    },
+                    }
                 },
                 populate: {
                     classAttendance: {
-                        fields: ["id", "date", "startTime", "endTime"],
+                        fields: ["id", "type", "date", "startTime", "endTime"],
                         populate: {
                             className: {
                                 fields: ["id", "className"]
@@ -134,23 +181,26 @@ module.exports = {
             const user = ctx.state.user;
             const currentDate = new Date();
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
+            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" } : { $eq: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" };
 
-            const lastDateHistory = getLastNMonthsDate(currentDate, lastNMonthHistory);
-            console.log(lastDateHistory);
+            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
                     username: user.id,
+                    position: "D. 学员",
                     classAttendance: {
+                        type: type,
                         date: {
-                            $gte: lastDateHistory
+                            $between: [lastDateHistory, currentDate]
                         },
-                    },
+                    }
                 },
                 populate: {
                     classAttendance: {
-                        fields: ["id", "date"]
+                        fields: ["id", "date", "type", "lesson"],
                     },
                 },
                 sort: "createdAt:desc"
@@ -164,35 +214,3 @@ module.exports = {
     }
 
 };
-
-function addDurationToTime(timeString: string, durationMinutes: number): string {
-    // Parse the time string into a Date object
-    const [hours, minutes, seconds] = timeString.split(':').map(Number);
-    const baseDate = new Date();
-    baseDate.setHours(hours, minutes, seconds, 0);
-
-    // Add the duration in minutes
-    const newTime = new Date(baseDate.getTime() + durationMinutes * 60000);
-
-    return getTimeString(newTime);
-}
-
-function subtractDurationFromTime(timeString: string, durationMinutes: number): string {
-    const [hours, minutes, seconds] = timeString.split(':').map(Number);
-    const baseDate = new Date();
-    baseDate.setHours(hours, minutes, seconds, 0);
-
-    // Subtract the duration in minutes
-    const newTime = new Date(baseDate.getTime() - durationMinutes * 60000);
-
-    return getTimeString(newTime);
-}
-
-function getTimeString(date: Date): string {
-    return date.toTimeString().split(' ')[0];
-}
-
-function getLastNMonthsDate(currentDate: Date, n: number): Date {
-    currentDate.setMonth(currentDate.getMonth() - n);
-    return currentDate;
-}

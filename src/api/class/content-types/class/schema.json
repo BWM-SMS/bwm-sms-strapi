@@ -63,6 +63,39 @@
         "Friday",
         "Saturday"
       ]
+    },
+    "previousClass": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::class.class"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
+    },
+    "venue": {
+      "type": "enumeration",
+      "enum": [
+        "BWM",
+        "Citiraya"
+      ],
+      "required": true
+    },
+    "room": {
+      "type": "enumeration",
+      "enum": [
+        "BWM-301",
+        "BWM-302",
+        "BWM-303"
+      ],
+      "required": true
+    },
+    "editedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "private": true
     }
   }
 }

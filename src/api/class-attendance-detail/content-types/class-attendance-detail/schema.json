@@ -36,6 +36,24 @@
       "type": "integer",
       "max": 5,
       "min": 0
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "A. 班长",
+        "B. 副班长",
+        "C. 关怀员",
+        "D. 学员",
+        "E. 旁听"
+      ],
+      "default": "D. 学员",
+      "required": true
+    },
+    "editedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "private": true
     }
   }
 }

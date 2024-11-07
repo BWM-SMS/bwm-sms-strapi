@@ -389,6 +389,11 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     isAttend: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<false>;
@@ -399,6 +404,17 @@ export interface ApiClassAttendanceDetailClassAttendanceDetail
     > &
       Schema.Attribute.Private;
     note: Schema.Attribute.Text;
+    position: Schema.Attribute.Enumeration<
+      [
+        'A. \u73ED\u957F',
+        'B. \u526F\u73ED\u957F',
+        'C. \u5173\u6000\u5458',
+        'D. \u5B66\u5458',
+        'E. \u65C1\u542C',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'D. \u5B66\u5458'>;
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
@@ -440,6 +456,11 @@ export interface ApiClassAttendanceClassAttendance
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date: Schema.Attribute.Date & Schema.Attribute.Required;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
     endTime: Schema.Attribute.Time & Schema.Attribute.Required;
     lesson: Schema.Attribute.Enumeration<
       ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
@@ -496,13 +517,24 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
+    isActive: Schema.Attribute.Boolean &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<true>;
     language: Schema.Attribute.Enumeration<
       ['C: \u534E\u6587', 'B: \u53CC\u8BED']
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::class.class'> &
       Schema.Attribute.Private;
+    previousClass: Schema.Attribute.Relation<'oneToOne', 'api::class.class'>;
     publishedAt: Schema.Attribute.DateTime;
+    room: Schema.Attribute.Enumeration<['BWM-301', 'BWM-302', 'BWM-303']> &
+      Schema.Attribute.Required;
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
       [
@@ -519,6 +551,8 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-class.user-class'
     >;
+    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']> &
+      Schema.Attribute.Required;
   };
 }
 
@@ -604,6 +638,181 @@ export interface ApiEnrollmentEnrollment extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiHolidayScheduleHolidaySchedule
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'holiday_schedules';
+  info: {
+    displayName: 'Holiday Schedule';
+    pluralName: 'holiday-schedules';
+    singularName: 'holiday-schedule';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::holiday-schedule.holiday-schedule'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    notes: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<
+      [
+        'Public Holiday',
+        'Monastery Holiday',
+        'Maintenance',
+        'Restricted Access',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Public Holiday'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiSusFeedbackSusFeedback extends Struct.CollectionTypeSchema {
+  collectionName: 'sus_feedbacks';
+  info: {
+    description: '';
+    displayName: 'SUS Feedback';
+    pluralName: 'sus-feedbacks';
+    singularName: 'sus-feedback';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    improvementModule: Schema.Attribute.Enumeration<
+      ['Self Attendance', 'Attendance History', 'Profile', 'Login']
+    >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sus-feedback.sus-feedback'
+    > &
+      Schema.Attribute.Private;
+    note: Schema.Attribute.Text;
+    publishedAt: Schema.Attribute.DateTime;
+    q1: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q10: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q2: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q3: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q4: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q5: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q6: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q7: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q8: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    q9: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 5;
+          min: 1;
+        },
+        number
+      >;
+    score: Schema.Attribute.Decimal &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 100;
+          min: 0;
+        },
+        number
+      >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
   collectionName: 'user_classes';
   info: {
@@ -620,6 +829,12 @@ export interface ApiUserClassUserClass extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    editedBy: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    > &
+      Schema.Attribute.Private;
+    endDate: Schema.Attribute.Date;
     isActive: Schema.Attribute.Boolean &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
@@ -1144,9 +1359,7 @@ export interface PluginUsersPermissionsUser
     image: Schema.Attribute.Media<'images'>;
     joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localization: Schema.Attribute.Enumeration<
-      ['English', 'Chinese (\u4E2D\u6587)']
-    > &
+    localization: Schema.Attribute.Enumeration<['English', 'Chinese']> &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'English'>;
     localizations: Schema.Attribute.Relation<
@@ -1188,6 +1401,11 @@ export interface PluginUsersPermissionsUser
         ['IT', 'Drawing']
       > &
       Schema.Attribute.DefaultTo<'[]'>;
+    sus_feedbacks: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::sus-feedback.sus-feedback'
+    > &
+      Schema.Attribute.Private;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1219,6 +1437,8 @@ declare module '@strapi/strapi' {
       'api::class.class': ApiClassClass;
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
+      'api::holiday-schedule.holiday-schedule': ApiHolidayScheduleHolidaySchedule;
+      'api::sus-feedback.sus-feedback': ApiSusFeedbackSusFeedback;
       'api::user-class.user-class': ApiUserClassUserClass;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

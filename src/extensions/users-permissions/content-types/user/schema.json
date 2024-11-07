@@ -129,7 +129,7 @@
       "type": "enumeration",
       "enum": [
         "English",
-        "Chinese (中文)"
+        "Chinese"
       ],
       "default": "English",
       "required": true
@@ -151,6 +151,13 @@
         "Drawing"
       ],
       "customField": "plugin::multi-select.multi-select"
+    },
+    "sus_feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::sus-feedback.sus-feedback",
+      "private": true,
+      "mappedBy": "username"
     }
   }
 }

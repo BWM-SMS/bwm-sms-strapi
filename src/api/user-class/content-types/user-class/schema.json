@@ -47,6 +47,15 @@
     },
     "note": {
       "type": "text"
+    },
+    "endDate": {
+      "type": "date"
+    },
+    "editedBy": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "private": true
     }
   }
 }
