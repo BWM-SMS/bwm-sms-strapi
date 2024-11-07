@@ -122,7 +122,7 @@ module.exports = {
                 }
             });
         } catch (err) {
-            console.error("Error creating attendance and attendance details:", err);
+            console.error("Error holiday schedule:", err);
             throw err;
         }
     },
@@ -170,7 +170,7 @@ module.exports = {
 
             return classData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in service:', err);
             throw err;
         }
     },
@@ -206,9 +206,8 @@ module.exports = {
 
             return classData;
         } catch (err) {
-            console.error('Error in recurring service:', err);
+            console.error('Error in service:', err);
             throw err;
         }
     }
-
 };
