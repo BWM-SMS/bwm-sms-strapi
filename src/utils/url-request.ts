@@ -1,10 +1,7 @@
 
 function getTypeFromUrl(ctx: any, param: string): string | null {
-    const fullUrl = ctx.host + ctx.url;
-
-    console.log("URL",ctx.host,ctx.url,fullUrl);
-    const url = new URL(fullUrl, ctx.host); // Base URL is required for URL parsing
-    const params = new URLSearchParams(url.search);
+    const fullUrl = new URL(ctx.url, `http://${ctx.host}`); // Ensure the full URL is correctly constructed
+    const params = new URLSearchParams(fullUrl.search);
     return params.get(param);
 }
 
