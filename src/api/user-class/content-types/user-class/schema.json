@@ -24,11 +24,6 @@
       "target": "api::class.class",
       "inversedBy": "userClasses"
     },
-    "isActive": {
-      "type": "boolean",
-      "default": true,
-      "required": true
-    },
     "position": {
       "type": "enumeration",
       "enum": [
@@ -45,11 +40,16 @@
       "type": "date",
       "required": true
     },
-    "note": {
-      "type": "text"
+    "isActive": {
+      "type": "boolean",
+      "default": true,
+      "required": true
     },
     "endDate": {
       "type": "date"
+    },
+    "note": {
+      "type": "text"
     },
     "editedBy": {
       "type": "relation",

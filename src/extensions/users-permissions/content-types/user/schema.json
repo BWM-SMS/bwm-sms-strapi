@@ -72,35 +72,6 @@
     "chineseName": {
       "type": "string"
     },
-    "phoneNumber": {
-      "type": "biginteger",
-      "required": false,
-      "max": "999999999999999",
-      "min": "9999999"
-    },
-    "birthYear": {
-      "type": "integer",
-      "max": 2500,
-      "required": true,
-      "min": 1900
-    },
-    "postalCode": {
-      "type": "integer",
-      "max": 999999,
-      "min": 9999
-    },
-    "classAttendanceDetails": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::class-attendance-detail.class-attendance-detail",
-      "mappedBy": "username"
-    },
-    "userClasses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-class.user-class",
-      "mappedBy": "username"
-    },
     "gender": {
       "type": "enumeration",
       "enum": [
@@ -109,9 +80,41 @@
       ],
       "required": true
     },
+    "phoneNumber": {
+      "type": "text"
+    },
+    "birthYear": {
+      "type": "integer",
+      "max": 2500,
+      "required": true,
+      "min": 1900
+    },
     "joinYear": {
       "type": "integer",
       "required": true
+    },
+    "postalCode": {
+      "type": "integer",
+      "max": 999999,
+      "min": 9999
+    },
+    "hobby": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Reading",
+        "Singing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "skill": {
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "IT",
+        "Drawing"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     },
     "image": {
       "type": "media",
@@ -134,23 +137,17 @@
       "default": "English",
       "required": true
     },
-    "hobby": {
-      "type": "customField",
-      "default": "[]",
-      "options": [
-        "Reading",
-        "Singing"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+    "classAttendanceDetails": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-attendance-detail.class-attendance-detail",
+      "mappedBy": "username"
     },
-    "skill": {
-      "type": "customField",
-      "default": "[]",
-      "options": [
-        "IT",
-        "Drawing"
-      ],
-      "customField": "plugin::multi-select.multi-select"
+    "userClasses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-class.user-class",
+      "mappedBy": "username"
     },
     "sus_feedbacks": {
       "type": "relation",

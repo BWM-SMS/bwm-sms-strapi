@@ -16,27 +16,19 @@
       "type": "date",
       "required": true
     },
+    "startTime": {
+      "type": "time",
+      "required": true
+    },
+    "endTime": {
+      "type": "time",
+      "required": true
+    },
     "className": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::class.class",
       "inversedBy": "classAttendances"
-    },
-    "lesson": {
-      "type": "enumeration",
-      "enum": [
-        "A. 善知识",
-        "B. 皈依"
-      ]
-    },
-    "classAttendanceDetails": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::class-attendance-detail.class-attendance-detail",
-      "mappedBy": "classAttendance"
-    },
-    "note": {
-      "type": "text"
     },
     "type": {
       "type": "enumeration",
@@ -46,19 +38,27 @@
       ],
       "required": true
     },
-    "startTime": {
-      "type": "time",
-      "required": true
+    "lesson": {
+      "type": "enumeration",
+      "enum": [
+        "A. 善知识",
+        "B. 皈依"
+      ]
     },
-    "endTime": {
-      "type": "time",
-      "required": true
+    "note": {
+      "type": "text"
     },
     "editedBy": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "private": true
+    },
+    "classAttendanceDetails": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::class-attendance-detail.class-attendance-detail",
+      "mappedBy": "classAttendance"
     }
   }
 }

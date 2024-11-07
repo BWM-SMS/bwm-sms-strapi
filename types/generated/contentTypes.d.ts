@@ -1372,14 +1372,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
-    phoneNumber: Schema.Attribute.BigInteger &
-      Schema.Attribute.SetMinMax<
-        {
-          max: '999999999999999';
-          min: '9999999';
-        },
-        string
-      >;
+    phoneNumber: Schema.Attribute.Text;
     postalCode: Schema.Attribute.Integer &
       Schema.Attribute.SetMinMax<
         {
