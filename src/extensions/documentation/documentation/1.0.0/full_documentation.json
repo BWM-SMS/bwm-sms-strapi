@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-07T15:40:03.358Z"
+    "x-generation-date": "2024-11-08T07:02:46.419Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -7019,15 +7019,7 @@
                       "type": "number",
                       "format": "float"
                     },
-                    "improvementModule": {
-                      "type": "string",
-                      "enum": [
-                        "Self Attendance",
-                        "Attendance History",
-                        "Profile",
-                        "Login"
-                      ]
-                    },
+                    "improvementModule": {},
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -8721,15 +8713,7 @@
                           "type": "number",
                           "format": "float"
                         },
-                        "improvementModule": {
-                          "type": "string",
-                          "enum": [
-                            "Self Attendance",
-                            "Attendance History",
-                            "Profile",
-                            "Login"
-                          ]
-                        },
+                        "improvementModule": {},
                         "createdAt": {
                           "type": "string",
                           "format": "date-time"
@@ -10390,15 +10374,7 @@
                               "type": "number",
                               "format": "float"
                             },
-                            "improvementModule": {
-                              "type": "string",
-                              "enum": [
-                                "Self Attendance",
-                                "Attendance History",
-                                "Profile",
-                                "Login"
-                              ]
-                            },
+                            "improvementModule": {},
                             "createdAt": {
                               "type": "string",
                               "format": "date-time"
@@ -12416,15 +12392,7 @@
                 "type": "number",
                 "format": "float"
               },
-              "improvementModule": {
-                "type": "string",
-                "enum": [
-                  "Self Attendance",
-                  "Attendance History",
-                  "Profile",
-                  "Login"
-                ]
-              },
+              "improvementModule": {},
               "locale": {
                 "type": "string"
               },
@@ -13910,15 +13878,7 @@
                       "type": "number",
                       "format": "float"
                     },
-                    "improvementModule": {
-                      "type": "string",
-                      "enum": [
-                        "Self Attendance",
-                        "Attendance History",
-                        "Profile",
-                        "Login"
-                      ]
-                    },
+                    "improvementModule": {},
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"
@@ -14063,15 +14023,7 @@
             "type": "number",
             "format": "float"
           },
-          "improvementModule": {
-            "type": "string",
-            "enum": [
-              "Self Attendance",
-              "Attendance History",
-              "Profile",
-              "Login"
-            ]
-          },
+          "improvementModule": {},
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -15685,15 +15637,7 @@
                       "type": "number",
                       "format": "float"
                     },
-                    "improvementModule": {
-                      "type": "string",
-                      "enum": [
-                        "Self Attendance",
-                        "Attendance History",
-                        "Profile",
-                        "Login"
-                      ]
-                    },
+                    "improvementModule": {},
                     "createdAt": {
                       "type": "string",
                       "format": "date-time"

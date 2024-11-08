@@ -135,8 +135,8 @@ module.exports = {
             const openTakeAttendance = 60 // Replace to Strapi Configuration
             const closeTakeAttendance = 30 // Replace to Strapi Configuration
 
-            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendance);
-            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendance);
+            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendance, false);
+            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendance, false);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
