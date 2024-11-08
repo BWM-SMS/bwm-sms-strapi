@@ -1,5 +1,5 @@
 
-function addDurationToTime(timeString: string, durationMinutes: number): string {
+function addDurationToTime(timeString: string, durationMinutes: number, isAllowCross: boolean = true): string {
     // Parse the time string into a Date object
     const [hours, minutes, seconds] = timeString.split(':').map(Number);
     const baseDate = new Date();
@@ -8,16 +8,30 @@ function addDurationToTime(timeString: string, durationMinutes: number): string 
     // Add the duration in minutes
     const newTime = new Date(baseDate.getTime() + durationMinutes * 60000);
 
+    // Ensure the new time does not cross into the next day
+    if (isAllowCross == false) {
+        if (newTime.getDate() !== baseDate.getDate()) {
+            newTime.setHours(23, 59, 59, 999); // Set to the last millisecond of the same day
+        }
+    }
+
     return getTimeString(newTime);
 }
 
-function subtractDurationFromTime(timeString: string, durationMinutes: number): string {
+function subtractDurationFromTime(timeString: string, durationMinutes: number, isAllowCross: boolean = true): string {
     const [hours, minutes, seconds] = timeString.split(':').map(Number);
     const baseDate = new Date();
     baseDate.setHours(hours, minutes, seconds, 0);
 
     // Subtract the duration in minutes
     const newTime = new Date(baseDate.getTime() - durationMinutes * 60000);
+
+    // Ensure the new time does not cross into the previous day
+    if (isAllowCross == false) {
+        if (newTime.getDate() !== baseDate.getDate()) {
+            newTime.setHours(0, 0, 0, 0); // Set to the first millisecond of the same day
+        }
+    }
 
     return getTimeString(newTime);
 }

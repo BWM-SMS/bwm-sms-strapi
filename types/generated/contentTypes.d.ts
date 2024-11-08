@@ -694,9 +694,12 @@ export interface ApiSusFeedbackSusFeedback extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    improvementModule: Schema.Attribute.Enumeration<
-      ['Self Attendance', 'Attendance History', 'Profile', 'Login']
-    >;
+    improvementModule: Schema.Attribute.JSON &
+      Schema.Attribute.CustomField<
+        'plugin::multi-select.multi-select',
+        ['Login', 'Take Attendance', 'Attendance History', 'Profile']
+      > &
+      Schema.Attribute.DefaultTo<'[]'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',

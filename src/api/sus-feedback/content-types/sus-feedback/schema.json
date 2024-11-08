@@ -88,13 +88,15 @@
       "type": "decimal"
     },
     "improvementModule": {
-      "type": "enumeration",
-      "enum": [
-        "Self Attendance",
+      "type": "customField",
+      "default": "[]",
+      "options": [
+        "Login",
+        "Take Attendance",
         "Attendance History",
-        "Profile",
-        "Login"
-      ]
+        "Profile"
+      ],
+      "customField": "plugin::multi-select.multi-select"
     }
   }
 }
