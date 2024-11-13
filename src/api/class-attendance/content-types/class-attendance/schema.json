@@ -48,6 +48,10 @@
     "note": {
       "type": "text"
     },
+    "submitEndDateTime": {
+      "type": "datetime",
+      "required": true
+    },
     "editedBy": {
       "type": "relation",
       "relation": "oneToOne",
