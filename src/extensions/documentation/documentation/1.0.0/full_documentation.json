@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2024-11-08T08:44:26.158Z"
+    "x-generation-date": "2024-11-25T09:06:00.383Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -6773,6 +6773,10 @@
                         "note": {
                           "type": "string"
                         },
+                        "submitEndDateTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
                         "editedBy": {
                           "type": "object",
                           "properties": {
@@ -7241,7 +7245,8 @@
               "date",
               "startTime",
               "endTime",
-              "type"
+              "type",
+              "submitEndDateTime"
             ],
             "type": "object",
             "properties": {
@@ -7286,6 +7291,10 @@
               },
               "note": {
                 "type": "string"
+              },
+              "submitEndDateTime": {
+                "type": "string",
+                "format": "date-time"
               },
               "editedBy": {
                 "oneOf": [
@@ -7374,7 +7383,8 @@
           "date",
           "startTime",
           "endTime",
-          "type"
+          "type",
+          "submitEndDateTime"
         ],
         "properties": {
           "id": {
@@ -8359,6 +8369,10 @@
                             "note": {
                               "type": "string"
                             },
+                            "submitEndDateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
                             "editedBy": {
                               "type": "object",
                               "properties": {
@@ -8929,6 +8943,10 @@
           },
           "note": {
             "type": "string"
+          },
+          "submitEndDateTime": {
+            "type": "string",
+            "format": "date-time"
           },
           "editedBy": {
             "type": "object",
@@ -10590,6 +10608,10 @@
               },
               "note": {
                 "type": "string"
+              },
+              "submitEndDateTime": {
+                "type": "string",
+                "format": "date-time"
               },
               "editedBy": {
                 "type": "object",
@@ -13632,6 +13654,10 @@
                         "note": {
                           "type": "string"
                         },
+                        "submitEndDateTime": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
                         "editedBy": {
                           "type": "object",
                           "properties": {
@@ -15390,6 +15416,10 @@
                         },
                         "note": {
                           "type": "string"
+                        },
+                        "submitEndDateTime": {
+                          "type": "string",
+                          "format": "date-time"
                         },
                         "editedBy": {
                           "type": "object",

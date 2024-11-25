@@ -474,6 +474,7 @@ export interface ApiClassAttendanceClassAttendance
     note: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
     startTime: Schema.Attribute.Time & Schema.Attribute.Required;
+    submitEndDateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<
       ['A. \u7814\u8BA8\u73ED', 'B. \u5FC6\u5E08\u6069']
     > &

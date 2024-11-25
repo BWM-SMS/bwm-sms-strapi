@@ -14,7 +14,6 @@ module.exports = {
     async currentClassService(ctx) {
         try {
             const user = ctx.state.user;
-            const currentDate = new Date();
 
             const classData = await strapi.documents('api::user-class.user-class').findMany({
                 filters: {
@@ -46,7 +45,7 @@ module.exports = {
             const currentDate = new Date();
 
             // Getting this week start and end date
-            const { startDate, endDate } = DateTime.getWeekStartAndEndDate(currentDate);
+            const { startDate, endDate } = DateTime.getWeekStartAndEndDate(currentDate, 1);
 
             const attendanceData = await strapi.documents('api::class-attendance.class-attendance').findFirst({
                 filters: {
@@ -54,9 +53,12 @@ module.exports = {
                         documentId: classId,
                         isActive: true
                     },
-                    date: {
-                        $between: [startDate, endDate]
+                    submitEndDateTime: {
+                        $gte: currentDate
                     },
+                    date: {
+                        $lte: endDate
+                    }
                 },
                 populate: {
                     className: {

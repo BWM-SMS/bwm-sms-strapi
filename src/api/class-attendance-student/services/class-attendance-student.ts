@@ -54,11 +54,15 @@ module.exports = {
                 .service("api::class-attendance-student.class-attendance-student")
                 .getHolidaySchedule();
 
+
+            const currentDate: Date = new Date();
+            const closeSubmitNHour = 24 // In Hour, Replace to Strapi Configuration
+
             // Loop through each class in classData
             for (const classItem of classData) {
                 // Every Monday 12am, create all the attendance for the week
-                const currentDate: Date = new Date();
                 const classDate: Date = DateTime.nextDateBasedDay(currentDate, classItem.classDay)
+                const attendanceDateTime: Date = DateTime.combineDateAndTime(classDate, classItem.classTime);
 
                 // Check if classDate matches any holiday date
                 const isHoliday = holidayData.some(holiday => {
@@ -79,6 +83,7 @@ module.exports = {
                         className: classItem.documentId, // Reference to the class
                         startTime: classItem.classTime, // Set the start time for the class
                         endTime: DateTime.addDurationToTime(classItem.classTime, classItem.classDuration), // Set the end time for the class
+                        submitEndDateTime: DateTime.addHourToDate(attendanceDateTime, closeSubmitNHour), // Set the end time for submitting attendance
                         type: "A. 研讨班",
                         updatedBy: "2", // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin user
                         createdBy: "2" // By default: System Helpdesk, set the updatedBy and createdAt fields to the ID of the admin user
@@ -132,11 +137,11 @@ module.exports = {
             const currentDate = new Date();
             const currentTime = DateTime.getTimeString(currentDate);
 
-            const openTakeAttendance = 60 // Replace to Strapi Configuration
-            const closeTakeAttendance = 30 // Replace to Strapi Configuration
+            const openTakeAttendanceNMinute = 60 // In Minutes, Replace to Strapi Configuration
+            const closeTakeAttendanceNMinute = 30 // In Minutes, Replace to Strapi Configuration
 
-            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendance, false);
-            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendance, false);
+            const openTakeTime = DateTime.addDurationToTime(currentTime, openTakeAttendanceNMinute, false);
+            const closeTakeTime = DateTime.subtractDurationFromTime(currentTime, closeTakeAttendanceNMinute, false);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {

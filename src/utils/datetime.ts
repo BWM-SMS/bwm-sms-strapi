@@ -36,6 +36,12 @@ function subtractDurationFromTime(timeString: string, durationMinutes: number, i
     return getTimeString(newTime);
 }
 
+function addHourToDate(date: Date, hour: number): Date {
+    const newDate = new Date(date);
+    newDate.setHours(newDate.getHours() + hour);
+    return newDate;
+}
+
 function getTimeString(date: Date): string {
     const newDate = new Date(date); // Create a new Date object to avoid mutating the original
     return newDate.toTimeString().split(' ')[0];
@@ -56,17 +62,30 @@ function nextDateBasedDay(currentDate: Date, classDay: "Sunday" | "Monday" | "Tu
     return nextClassDate;
 }
 
-function getWeekStartAndEndDate(currentDate: Date): { startDate: Date, endDate: Date } {
+function getWeekStartAndEndDate(currentDate: Date, extraDays: number = 0): { startDate: Date, endDate: Date } {
     const startDate = new Date(currentDate);
     const endDate = new Date(currentDate);
 
     // Set the start date to the previous Monday
     startDate.setDate(currentDate.getDate() - (currentDate.getDay() + 6) % 7);
 
-    // Set the end date to the next Sunday
-    endDate.setDate(currentDate.getDate() + (7 - currentDate.getDay()) % 7);
+    // Set the end date to the next Sunday and add extra days
+    endDate.setDate(currentDate.getDate() + (7 - currentDate.getDay()) % 7 + extraDays);
 
     return { startDate, endDate };
+}
+
+function combineDateAndTime(date: Date, time: string): Date {
+    // Remove the time part from the date
+    const dateOnly = new Date(date.toDateString());
+
+    // Split the time string into hours, minutes, and seconds
+    const [hours, minutes, seconds] = time.split(':').map(Number);
+
+    // Set the hours, minutes, and seconds to the date
+    dateOnly.setHours(hours, minutes, seconds);
+
+    return dateOnly;
 }
 
 const DateTime = {
@@ -75,7 +94,9 @@ const DateTime = {
     getTimeString,
     getLastNMonthsDate,
     nextDateBasedDay,
-    getWeekStartAndEndDate
+    getWeekStartAndEndDate,
+    combineDateAndTime,
+    addHourToDate
 };
 
 export { DateTime };
