@@ -1,71 +1,15 @@
 # 🚀 Getting started with Strapi
+NodeJS:      v20.12.0
 
-Node:      v20.12.0
+1. Install NodeJS 
+2. run `npm install`
+3. obtain the database files and environment key from Brian
+4. Create a .tmp folder in the root directory and move the data.db file into the .tmp folder.
+5. Create a .env file in the root directory and update it with the necessary values.
+6. Follow this by executing `npm start` 
+7. Access the application by navigating to localhost:1337 in your browser.
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
-
-### `develop`
-
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
-
-```
-npm run develop
-# or
-yarn develop
-```
-
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
-```
-
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
-```
-
-## ⚙️ Deployment
-
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
-
-```
-yarn strapi deploy
-```
-
-## Docker Deployment
-
-
-```
-docker build . -t strapi
-docker compose up
-```
-
-## 📚 Learn more
-
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
-
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
-
-## ✨ Community
-
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
-
----
-
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+# Note
+1. For local development, we'll be utilizing SQLite for testing purposes, which won't impact the staging environment (which is postgres db). 
+2. In the staging environment, we'll operate in production build mode. This setting will lock the CMS feature, preventing schema edits. Conversely, in the development environment, we'll run in development mode, enabling the CMS feature and allowing us to edit and test its functionalities.
+3. Commit the code into the `develop` branch and create PR to `master` branch for review and merge. 
