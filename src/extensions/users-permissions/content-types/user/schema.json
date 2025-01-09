@@ -102,8 +102,14 @@
       "type": "customField",
       "default": "[]",
       "options": [
-        "Reading",
-        "Singing"
+        "Creative & Artistic Arts 创意与艺术",
+        "Physical Activities & Sports 体育活动与运动",
+        "Music & Performance 音乐与表演",
+        "Learning & Intellectual Growth 学习与知识拓展",
+        "Technology & Digital Skills 科技与数码技能",
+        "Nature & Outdoor Exploration 自然与户外探险",
+        "Food & Beverage Culinary Exploration 烹饪与饮品探索",
+        "Collecting & Cultural Appreciation 收藏与文化欣赏"
       ],
       "customField": "plugin::multi-select.multi-select"
     },
@@ -111,8 +117,20 @@
       "type": "customField",
       "default": "[]",
       "options": [
-        "IT",
-        "Drawing"
+        "Administrative 行政",
+        "Art & Culture 文化艺术",
+        "Digital & Information 数码 & 资讯",
+        "Education 教育",
+        "Events & Exhibitions 活动 & 展览",
+        "Facilities & Maintenance 设施维护&管理",
+        "Finance and Accounting 财会",
+        "Food & Beverage 食品和饮料",
+        "Graphic & Design 平面设计",
+        "Healthcare 医疗保健",
+        "Language & Literature 语言与文学",
+        "Management 管理",
+        "Policy & Legal Consultancy 政策与法律咨询",
+        "Service & Hospitality 服务与接待"
       ],
       "customField": "plugin::multi-select.multi-select"
     },
@@ -132,7 +150,9 @@
       "type": "enumeration",
       "enum": [
         "English",
-        "Chinese"
+        "Chinese",
+        "Malay",
+        "Tamil"
       ],
       "default": "English",
       "required": true

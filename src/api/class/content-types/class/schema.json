@@ -18,17 +18,19 @@
     "type": {
       "type": "enumeration",
       "enum": [
-        "A: 一轮班",
-        "B: 增上班",
-        "C: 止观班",
-        "D: 宗行班"
+        "G. 一轮班",
+        "Z. 增上班",
+        "W. 五大论班",
+        "P. 止观班",
+        "L. 乐龄广论班"
       ]
     },
     "language": {
       "type": "enumeration",
       "enum": [
-        "C: 华文",
-        "B: 双语"
+        "C. 华文",
+        "B. 双语",
+        "Y. 学青"
       ]
     },
     "classDay": {

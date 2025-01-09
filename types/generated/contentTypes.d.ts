@@ -463,7 +463,37 @@ export interface ApiClassAttendanceClassAttendance
       Schema.Attribute.Private;
     endTime: Schema.Attribute.Time & Schema.Attribute.Required;
     lesson: Schema.Attribute.Enumeration<
-      ['A. \u5584\u77E5\u8BC6', 'B. \u7688\u4F9D']
+      [
+        'A. \u5341\u5802\u8BFE \u5907\u89C8',
+        'B. \u6B62\u89C2',
+        'C. \u5E7F\u6D77\u660E\u6708',
+        'D. \u4E94\u5927\u8BBA \uFF08\u6444\u7C7B\u5B66\uFF09',
+        'E. \u4E94\u5927\u8BBA \uFF08\u56E0\u7C7B\u5B66\uFF09',
+        'F. \u4E94\u5927\u8BBA \uFF08\u5FC3\u7C7B\u5B66\uFF09',
+        'G. \u4E94\u5927\u8BBA \uFF08\u5176\u4ED6\uFF09',
+        'H. \u9053\u524D\u57FA\u7840 - \u7688\u656C\u9882',
+        'I. \u9053\u524D\u57FA\u7840 - \u9020\u8005\u6B8A\u80DC',
+        'J. \u9053\u524D\u57FA\u7840 - \u6559\u6388\u6B8A\u80DC',
+        'K. \u9053\u524D\u57FA\u7840 - \u542C\u95FB\u8F68\u7406',
+        'L. \u9053\u524D\u57FA\u7840 - \u8BB2\u8BF4\u8F68\u7406',
+        'M. \u9053\u524D\u57FA\u7840 - \u5B8C\u7ED3\u8F68\u7406',
+        'N. \u9053\u524D\u57FA\u7840 - \u4EB2\u8FD1\u5584\u58EB\u8F68\u7406',
+        'O. \u9053\u524D\u57FA\u7840 - \u4FEE\u4E60\u8F68\u7406',
+        'P. \u9053\u524D\u57FA\u7840 - \u6687\u6EE1',
+        'Q. \u9053\u524D\u57FA\u7840 - \u9053\u6B21\u5F15\u5BFC',
+        'R. \u4E0B\u58EB\u9053 - \u5FF5\u6B7B\u65E0\u5E38',
+        'S. \u4E0B\u58EB\u9053 - \u4E09\u6076\u8DA3\u82E6',
+        'T. \u4E0B\u58EB\u9053 - \u7688\u4F9D\u4E09\u5B9D',
+        'U. \u4E0B\u58EB\u9053 - \u6DF1\u4FE1\u4E1A\u679C',
+        'V. \u4E2D\u58EB\u9053 - \u5E0C\u6C42\u89E3\u8131',
+        'W. \u4E2D\u58EB\u9053 - \u601D\u60DF\u82E6\u8C1B',
+        'X. \u4E2D\u58EB\u9053 - \u5341\u4E8C\u7F18\u8D77',
+        'Y. \u4E2D\u58EB\u9053 - \u601D\u60DF\u96C6\u8C1B',
+        'Z. \u4E2D\u58EB\u9053 - \u9664\u90AA\u5206\u522B',
+        'AA. \u4E2D\u58EB\u9053 - \u89E3\u8131\u6B63\u9053',
+        'AB. \u4E0A\u58EB\u9053',
+        'ZZ. \u5176\u4ED6',
+      ]
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -476,7 +506,12 @@ export interface ApiClassAttendanceClassAttendance
     startTime: Schema.Attribute.Time & Schema.Attribute.Required;
     submitEndDateTime: Schema.Attribute.DateTime & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<
-      ['A. \u7814\u8BA8\u73ED', 'B. \u5FC6\u5E08\u6069']
+      [
+        'A. \u7814\u8BA8\u73ED',
+        'B. \u5FC5\u4FEE\u8BFE\uFF1A\u5409\u7965\u4F5B\u8BDE',
+        'C. \u5FC5\u4FEE\u8BFE\uFF1A\u5FC6\u5E08\u6069\u6CD5\u4F1A',
+        'D. \u5FC5\u4FEE\u8BFE\uFF1A\u5706\u6839\u706F\u4F1A',
+      ]
     > &
       Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -527,7 +562,7 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<true>;
     language: Schema.Attribute.Enumeration<
-      ['C: \u534E\u6587', 'B: \u53CC\u8BED']
+      ['C. \u534E\u6587', 'B. \u53CC\u8BED', 'Y. \u5B66\u9752']
     >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::class.class'> &
@@ -539,10 +574,11 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
       [
-        'A: \u4E00\u8F6E\u73ED',
-        'B: \u589E\u4E0A\u73ED',
-        'C: \u6B62\u89C2\u73ED',
-        'D: \u5B97\u884C\u73ED',
+        'G. \u4E00\u8F6E\u73ED',
+        'Z. \u589E\u4E0A\u73ED',
+        'W. \u4E94\u5927\u8BBA\u73ED',
+        'P. \u6B62\u89C2\u73ED',
+        'L. \u4E50\u9F84\u5E7F\u8BBA\u73ED',
       ]
     >;
     updatedAt: Schema.Attribute.DateTime;
@@ -1361,13 +1397,24 @@ export interface PluginUsersPermissionsUser
     hobby: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
-        ['Reading', 'Singing']
+        [
+          'Creative & Artistic Arts \u521B\u610F\u4E0E\u827A\u672F',
+          'Physical Activities & Sports \u4F53\u80B2\u6D3B\u52A8\u4E0E\u8FD0\u52A8',
+          'Music & Performance \u97F3\u4E50\u4E0E\u8868\u6F14',
+          'Learning & Intellectual Growth \u5B66\u4E60\u4E0E\u77E5\u8BC6\u62D3\u5C55',
+          'Technology & Digital Skills \u79D1\u6280\u4E0E\u6570\u7801\u6280\u80FD',
+          'Nature & Outdoor Exploration \u81EA\u7136\u4E0E\u6237\u5916\u63A2\u9669',
+          'Food & Beverage Culinary Exploration \u70F9\u996A\u4E0E\u996E\u54C1\u63A2\u7D22',
+          'Collecting & Cultural Appreciation \u6536\u85CF\u4E0E\u6587\u5316\u6B23\u8D4F',
+        ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
     image: Schema.Attribute.Media<'images'>;
     joinYear: Schema.Attribute.Integer & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localization: Schema.Attribute.Enumeration<['English', 'Chinese']> &
+    localization: Schema.Attribute.Enumeration<
+      ['English', 'Chinese', 'Malay', 'Tamil']
+    > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'English'>;
     localizations: Schema.Attribute.Relation<
@@ -1399,7 +1446,22 @@ export interface PluginUsersPermissionsUser
     skill: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
-        ['IT', 'Drawing']
+        [
+          'Administrative \u884C\u653F',
+          'Art & Culture \u6587\u5316\u827A\u672F',
+          'Digital & Information \u6570\u7801 & \u8D44\u8BAF',
+          'Education \u6559\u80B2',
+          'Events & Exhibitions \u6D3B\u52A8 & \u5C55\u89C8',
+          'Facilities & Maintenance \u8BBE\u65BD\u7EF4\u62A4&\u7BA1\u7406',
+          'Finance and Accounting \u8D22\u4F1A',
+          'Food & Beverage \u98DF\u54C1\u548C\u996E\u6599',
+          'Graphic & Design \u5E73\u9762\u8BBE\u8BA1',
+          'Healthcare \u533B\u7597\u4FDD\u5065',
+          'Language & Literature \u8BED\u8A00\u4E0E\u6587\u5B66',
+          'Management \u7BA1\u7406',
+          'Policy & Legal Consultancy \u653F\u7B56\u4E0E\u6CD5\u5F8B\u54A8\u8BE2',
+          'Service & Hospitality \u670D\u52A1\u4E0E\u63A5\u5F85',
+        ]
       > &
       Schema.Attribute.DefaultTo<'[]'>;
     sus_feedbacks: Schema.Attribute.Relation<
