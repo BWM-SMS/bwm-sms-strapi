@@ -20,3 +20,7 @@ primary_region = 'sin'
   cpu_kind = 'shared'
   cpus = 2
   memory_mb = 4096
+
+[mounts]
+  source = "strapi_media"
+  destination = "/app/public/uploads"
