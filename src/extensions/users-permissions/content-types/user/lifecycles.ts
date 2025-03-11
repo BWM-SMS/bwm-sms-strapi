@@ -37,7 +37,11 @@ export default {
         const incrementStr = String(nextIncrement).padStart(5, '0');
 
         // Generate the username
-        data.username = `${countryPrefix}${year}${incrementStr}`;
+        if(data.username){
+
+        }else{
+            data.username = `${countryPrefix}${year}${incrementStr}`;
+        }
 
         if (data.phoneNumber) {
             data.phoneNumber = Encryption.encrypt(data.phoneNumber);
