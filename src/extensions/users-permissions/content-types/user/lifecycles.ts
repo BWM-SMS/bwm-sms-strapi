@@ -37,10 +37,12 @@ export default {
         const incrementStr = String(nextIncrement).padStart(5, '0');
 
         // Generate the username
-        if(data.username){
-
-        }else{
+        if (data.username) { } else {
             data.username = `${countryPrefix}${year}${incrementStr}`;
+        }
+
+        if (data.password) { } else {
+            data.password = 'abc123';
         }
 
         if (data.phoneNumber) {
@@ -53,11 +55,11 @@ export default {
     },
     async beforeUpdate(event) {
         const { data } = event.params;
-        if(data){
+        if (data) {
             if (data.phoneNumber) {
                 data.phoneNumber = Encryption.encrypt(data.phoneNumber);
             }
-    
+
             if (data.email) {
                 data.email = Encryption.encrypt(data.email);
             }
