@@ -23,4 +23,4 @@ primary_region = 'sin'
 
 [mounts]
   source = "strapi_media"
-  destination = "/app/public/uploads"
+  destination = "/public/uploads"
