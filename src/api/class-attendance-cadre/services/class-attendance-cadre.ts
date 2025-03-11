@@ -92,8 +92,8 @@ module.exports = {
 
             const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
-            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" } : 
-            { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" };
+            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" } :
+                { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" };
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
