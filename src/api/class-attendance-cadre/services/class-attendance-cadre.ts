@@ -92,8 +92,8 @@ module.exports = {
 
             const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
-            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" } : 
-            { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" };
+            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" } :
+                { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" };
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
@@ -205,6 +205,16 @@ module.exports = {
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
+            const userData = await strapi.documents('plugin::users-permissions.user').findOne({
+                documentId: studentId,
+                fields: ["englishName", "chineseName", "phoneNumber", "gender", "birthYear", "joinYear", "hobby", "skill"],
+                populate: {
+                    image: {
+                        fields: ["url"]
+                    }
+                }
+            });
+
             const attendanceData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
                 filters: {
                     username: {
@@ -220,20 +230,12 @@ module.exports = {
                     }
                 },
                 populate: {
-                    username: {
-                        fields: ["englishName", "chineseName", "phoneNumber", "gender", "birthYear", "joinYear", "hobby", "skill"],
-                        populate: {
-                            image: {
-                                fields: ["url"]
-                            }
-                        }
-                    },
                     classAttendance: {
                         fields: ["date", "type", "lesson"],
                     }
                 }
             });
-            return attendanceData;
+            return { user: userData, attendance: attendanceData };
         } catch (err) {
             console.error('Error in class attendance history by student service:', err);
             throw err;
