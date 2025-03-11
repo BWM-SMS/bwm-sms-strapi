@@ -7,7 +7,6 @@ export default {
     async beforeCreate(event) {
         const { data, where, select, populate } = event.params;
 
-        console.log("aaa",data)
         // Define the country code prefix
         const countryPrefix = 'S'; // TODO: If going to support Malaysia
 
