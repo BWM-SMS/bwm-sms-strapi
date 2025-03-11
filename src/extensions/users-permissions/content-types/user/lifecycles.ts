@@ -41,10 +41,6 @@ export default {
             data.username = `${countryPrefix}${year}${incrementStr}`;
         }
 
-        if (data.password) { } else {
-            data.password = 'abc123';
-        }
-
         // if (data.phoneNumber) {
         //     data.phoneNumber = Encryption.encrypt(data.phoneNumber);
         // }

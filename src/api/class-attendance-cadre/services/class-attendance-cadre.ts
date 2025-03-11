@@ -67,8 +67,8 @@ module.exports = {
                     classAttendanceDetails: {
                         populate: {
                             username: {
-                                fields: ["username", "englishName", "chineseName" ],
-                                populate:{
+                                fields: ["username", "englishName", "chineseName"],
+                                populate: {
                                     image: {
                                         fields: ["url"]
                                     }
@@ -92,7 +92,8 @@ module.exports = {
 
             const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
-            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会"} : { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" };
+            const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" } : 
+            { $eq: "A. 研讨班" as "A. 研讨班" | "B. 必修课：吉祥佛诞" | "C. 必修课：忆师恩法会" | "D. 必修课：圆根灯会" | "E. 游戏/电影活动" | "F. 体育活动" | "G. 工作坊" | "H. 其他" };
 
             const lastNMonthHistory = 3 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
@@ -181,6 +182,9 @@ module.exports = {
                                     }
                                 },
                                 fields: ["isAttend"]
+                            },
+                            image: {
+                                fields: ["url"]
                             }
                         }
                     },
@@ -216,6 +220,14 @@ module.exports = {
                     }
                 },
                 populate: {
+                    username: {
+                        fields: ["englishName", "chineseName", "phoneNumber", "gender", "birthYear", "joinYear", "hobby", "skill"],
+                        populate: {
+                            image: {
+                                fields: ["url"]
+                            }
+                        }
+                    },
                     classAttendance: {
                         fields: ["date", "type", "lesson"],
                     }
