@@ -45,48 +45,48 @@ export default {
             data.password = 'abc123';
         }
 
-        if (data.phoneNumber) {
-            data.phoneNumber = Encryption.encrypt(data.phoneNumber);
-        }
+        // if (data.phoneNumber) {
+        //     data.phoneNumber = Encryption.encrypt(data.phoneNumber);
+        // }
 
-        if (data.email) {
-            data.email = Encryption.encrypt(data.email);
-        }
+        // if (data.email) {
+        //     data.email = Encryption.encrypt(data.email);
+        // }
     },
-    async beforeUpdate(event) {
-        const { data } = event.params;
-        if (data) {
-            if (data.phoneNumber) {
-                data.phoneNumber = Encryption.encrypt(data.phoneNumber);
-            }
+    // async beforeUpdate(event) {
+    //     const { data } = event.params;
+    //     if (data) {
+    //         if (data.phoneNumber) {
+    //             data.phoneNumber = Encryption.encrypt(data.phoneNumber);
+    //         }
 
-            if (data.email) {
-                data.email = Encryption.encrypt(data.email);
-            }
-        }
-    },
-    async afterFindOne(event) {
-        const { result } = event;
-        if (result) {
-            if (result.phoneNumber) {
-                result.phoneNumber = Encryption.decrypt(result.phoneNumber);
-            }
+    //         if (data.email) {
+    //             data.email = Encryption.encrypt(data.email);
+    //         }
+    //     }
+    // },
+    // async afterFindOne(event) {
+    //     const { result } = event;
+    //     if (result) {
+    //         if (result.phoneNumber) {
+    //             result.phoneNumber = Encryption.decrypt(result.phoneNumber);
+    //         }
 
-            if (result.email) {
-                result.email = Encryption.decrypt(result.email);
-            }
-        }
-    },
-    async afterFindMany(event) {
-        const { result } = event;
-        result.forEach(result => {
-            if (result.phoneNumber) {
-                result.phoneNumber = Encryption.decrypt(result.phoneNumber);
-            }
+    //         if (result.email) {
+    //             result.email = Encryption.decrypt(result.email);
+    //         }
+    //     }
+    // },
+    // async afterFindMany(event) {
+    //     const { result } = event;
+    //     result.forEach(result => {
+    //         if (result.phoneNumber) {
+    //             result.phoneNumber = Encryption.decrypt(result.phoneNumber);
+    //         }
 
-            if (result.email) {
-                result.email = Encryption.decrypt(result.email);
-            }
-        });
-    }
+    //         if (result.email) {
+    //             result.email = Encryption.decrypt(result.email);
+    //         }
+    //     });
+    // }
 };
