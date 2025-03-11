@@ -492,6 +492,7 @@ export interface ApiClassAttendanceClassAttendance
         'Z. \u4E2D\u58EB\u9053 - \u9664\u90AA\u5206\u522B',
         'AA. \u4E2D\u58EB\u9053 - \u89E3\u8131\u6B63\u9053',
         'AB. \u4E0A\u58EB\u9053',
+        'AC. \u8BFE\u7A0B',
         'ZZ. \u5176\u4ED6',
       ]
     >;
@@ -511,6 +512,10 @@ export interface ApiClassAttendanceClassAttendance
         'B. \u5FC5\u4FEE\u8BFE\uFF1A\u5409\u7965\u4F5B\u8BDE',
         'C. \u5FC5\u4FEE\u8BFE\uFF1A\u5FC6\u5E08\u6069\u6CD5\u4F1A',
         'D. \u5FC5\u4FEE\u8BFE\uFF1A\u5706\u6839\u706F\u4F1A',
+        'E. \u6E38\u620F/\u7535\u5F71\u6D3B\u52A8',
+        'F. \u4F53\u80B2\u6D3B\u52A8',
+        'G. \u5DE5\u4F5C\u574A',
+        'H. \u5176\u4ED6',
       ]
     > &
       Schema.Attribute.Required;
@@ -569,11 +574,25 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     previousClass: Schema.Attribute.Relation<'oneToOne', 'api::class.class'>;
     publishedAt: Schema.Attribute.DateTime;
-    room: Schema.Attribute.Enumeration<['BWM-301', 'BWM-302', 'BWM-303']> &
-      Schema.Attribute.Required;
+    room: Schema.Attribute.Enumeration<
+      [
+        'BWM-301',
+        'BWM-302',
+        'BWM-303',
+        'BWM-304',
+        'BWM-305',
+        'BWM-306',
+        'BWM-307',
+        'BWM-308',
+        'BWM-309',
+        'BWM-310',
+        'BWM-311',
+      ]
+    >;
     startDate: Schema.Attribute.Date;
     type: Schema.Attribute.Enumeration<
       [
+        'O. Omni',
         'G. \u4E00\u8F6E\u73ED',
         'Z. \u589E\u4E0A\u73ED',
         'W. \u4E94\u5927\u8BBA\u73ED',
@@ -588,8 +607,7 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-class.user-class'
     >;
-    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']> &
-      Schema.Attribute.Required;
+    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']>;
   };
 }
 
@@ -1367,7 +1385,6 @@ export interface PluginUsersPermissionsUser
   attributes: {
     acceptPDPA: Schema.Attribute.Boolean;
     birthYear: Schema.Attribute.Integer &
-      Schema.Attribute.Required &
       Schema.Attribute.SetMinMax<
         {
           max: 2500;
@@ -1387,13 +1404,11 @@ export interface PluginUsersPermissionsUser
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     email: Schema.Attribute.Email &
-      Schema.Attribute.Required &
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
     englishName: Schema.Attribute.String & Schema.Attribute.Required;
-    gender: Schema.Attribute.Enumeration<['Male', 'Female']> &
-      Schema.Attribute.Required;
+    gender: Schema.Attribute.Enumeration<['Male', 'Female']>;
     hobby: Schema.Attribute.JSON &
       Schema.Attribute.CustomField<
         'plugin::multi-select.multi-select',
