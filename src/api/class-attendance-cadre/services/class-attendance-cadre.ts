@@ -67,7 +67,12 @@ module.exports = {
                     classAttendanceDetails: {
                         populate: {
                             username: {
-                                fields: ["username", "englishName", "chineseName"],
+                                fields: ["username", "englishName", "chineseName" ],
+                                populate:{
+                                    image: {
+                                        fields: ["url"]
+                                    }
+                                }
                             },
                         }
                     }

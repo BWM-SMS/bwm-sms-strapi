@@ -15,6 +15,9 @@ primary_region = 'sin'
   min_machines_running = 1
   processes = ['app']
 
+[mounts]
+  source = "strapi_media"
+  destination = "/opt/app/public/uploads"
 
 [[vm]]
   memory = '4gb'
