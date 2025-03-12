@@ -96,7 +96,7 @@
     "postalCode": {
       "type": "integer",
       "max": 999999,
-      "min": 9999
+      "min": 9
     },
     "hobby": {
       "type": "customField",
