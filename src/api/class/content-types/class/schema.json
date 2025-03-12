@@ -18,6 +18,7 @@
     "type": {
       "type": "enumeration",
       "enum": [
+        "O. Omni",
         "G. 一轮班",
         "Z. 增上班",
         "W. 五大论班",
@@ -60,16 +61,24 @@
         "BWM",
         "Citiraya"
       ],
-      "required": true
+      "required": false
     },
     "room": {
       "type": "enumeration",
       "enum": [
         "BWM-301",
         "BWM-302",
-        "BWM-303"
+        "BWM-303",
+        "BWM-304",
+        "BWM-305",
+        "BWM-306",
+        "BWM-307",
+        "BWM-308",
+        "BWM-309",
+        "BWM-310",
+        "BWM-311"
       ],
-      "required": true
+      "required": false
     },
     "isActive": {
       "type": "boolean",

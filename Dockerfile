@@ -47,6 +47,9 @@ COPY --from=build /opt/app ./
 # Add node_modules binaries to PATH
 ENV PATH=/opt/node_modules/.bin:$PATH
 
+# ✅ Ensure uploads directory exists and has correct permissions
+RUN mkdir -p /opt/app/public/uploads && chmod -R 777 /opt/app/public/uploads
+
 # Change ownership of application files to node user
 RUN chown -R node:node /opt/app
 

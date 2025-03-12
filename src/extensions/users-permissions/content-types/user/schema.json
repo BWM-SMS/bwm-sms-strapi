@@ -23,7 +23,7 @@
       "type": "email",
       "minLength": 6,
       "configurable": false,
-      "required": true
+      "required": false
     },
     "provider": {
       "type": "string",
@@ -78,7 +78,7 @@
         "Male",
         "Female"
       ],
-      "required": true
+      "required": false
     },
     "phoneNumber": {
       "type": "text"
@@ -86,7 +86,7 @@
     "birthYear": {
       "type": "integer",
       "max": 2500,
-      "required": true,
+      "required": false,
       "min": 1900
     },
     "joinYear": {

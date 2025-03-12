@@ -28,6 +28,10 @@ COPY . .
 
 # Set permissions and user
 RUN chown -R node:node /opt/app
+
+# ✅ Ensure uploads directory exists and has correct permissions
+RUN mkdir -p /opt/app/public/uploads && chmod -R 777 /opt/app/public/uploads
+
 USER node
 
 # Build the application, the below code is meant for local staging env

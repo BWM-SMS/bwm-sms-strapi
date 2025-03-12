@@ -26,6 +26,6 @@ export default {
     });
 
     // Init Encryption model
-    Encryption.initEncryption()
+    // Encryption.initEncryption()
   },
 };
