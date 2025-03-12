@@ -59,7 +59,8 @@
       "type": "enumeration",
       "enum": [
         "BWM",
-        "Citiraya"
+        "Citiraya",
+        "Bugis"
       ],
       "required": false
     },
@@ -76,7 +77,8 @@
         "BWM-308",
         "BWM-309",
         "BWM-310",
-        "BWM-311"
+        "BWM-311",
+        "FC-1903"
       ],
       "required": false
     },
