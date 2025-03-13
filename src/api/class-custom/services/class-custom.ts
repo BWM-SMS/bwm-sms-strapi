@@ -9,13 +9,13 @@ module.exports = {
     async myClassService(ctx) {
         const user = ctx.state.user;
         const studentClassData = await strapi.documents('api::user-class.user-class').findFirst({
-            filters:{
+            filters: {
                 position: "D. 学员",
                 username: user.id,
                 isActive: true
             },
-            populate:{
-                className:{
+            populate: {
+                className: {
                     fields: ["id"]
                 }
             }
@@ -35,14 +35,15 @@ module.exports = {
                     },
                     populate: {
                         fields: ["position"],
+                        sort: "position:acs",
                         username: {
                             fields: ["id", "englishName", "chineseName", "phoneNumber"],
                             populate: {
                                 image: {
                                     fields: ["url"]
                                 }
-                            }
-                        }
+                            },
+                        },
                     }
                 }
             }
