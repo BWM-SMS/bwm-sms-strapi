@@ -35,7 +35,6 @@ module.exports = {
                     },
                     populate: {
                         fields: ["position"],
-                        sort: "position:acs",
                         username: {
                             fields: ["id", "englishName", "chineseName", "phoneNumber"],
                             populate: {
