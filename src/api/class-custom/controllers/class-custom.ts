@@ -3,19 +3,21 @@
  */
 
 export default {
-  exampleAction: async (ctx, next) => {
+  myClass: async (ctx, next) => {
     try {
-      // Custom logic here
-      // const data = await strapi.db.query('api::class.class').findMany();
+      const user = ctx.state.user;
+      
+      if (!user) {
+        return ctx.badRequest(null, [{ messages: [{ id: 'No authorization header was found' }] }]);
+      }
+
       const data = await strapi
         .service("api::class-custom.class-custom")
-        .findAllBlogs(ctx);
-      // console.log("Data", data);
-      // ctx.body = ctx.state.user;
+        .myClassService(ctx);
 
       ctx.body = data;
     } catch (err) {
       ctx.body = err;
     }
-  }
+  },
 };

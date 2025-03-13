@@ -515,7 +515,9 @@ export interface ApiClassAttendanceClassAttendance
         'E. \u6E38\u620F/\u7535\u5F71\u6D3B\u52A8',
         'F. \u4F53\u80B2\u6D3B\u52A8',
         'G. \u5DE5\u4F5C\u574A',
-        'H. \u5176\u4ED6',
+        'H. \u63D0\u5347\u8BFE',
+        'I. \u6CD5\u4F1A',
+        'Z. \u5176\u4ED6',
       ]
     > &
       Schema.Attribute.Required;
@@ -587,6 +589,7 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
         'BWM-309',
         'BWM-310',
         'BWM-311',
+        'FC-1903',
       ]
     >;
     startDate: Schema.Attribute.Date;
@@ -607,7 +610,7 @@ export interface ApiClassClass extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-class.user-class'
     >;
-    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya']>;
+    venue: Schema.Attribute.Enumeration<['BWM', 'Citiraya', 'Bugis']>;
   };
 }
 
@@ -1447,7 +1450,7 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMax<
         {
           max: 999999;
-          min: 9999;
+          min: 9;
         },
         number
       >;

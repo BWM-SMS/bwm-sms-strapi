@@ -6,34 +6,49 @@
 const { createCoreService: createCoreServiceClass } = require('@strapi/strapi').factories;
 
 module.exports = {
-    async findAllBlogs(ctx) {
+    async myClassService(ctx) {
         const user = ctx.state.user;
-
-        console.log("Data", user);
-        //   return [];
-        return await strapi.db.query('api::class.class').findMany({
-            where: {
-                userClasses: {
-                    username: {
-                        id: user.id
-                    }
+        const studentClassData = await strapi.documents('api::user-class.user-class').findFirst({
+            filters:{
+                position: "D. 学员",
+                username: user.id,
+                isActive: true
+            },
+            populate:{
+                className:{
+                    fields: ["id"]
                 }
+            }
+
+        });
+
+        const classData = await strapi.documents('api::class.class').findFirst({
+            filters: {
+                id: studentClassData.className.id,
+                isActive: true,
             },
             populate: {
-
+                fields: ["className", "classTime", "classDuration", "classDay", "venue", "room"],
                 userClasses: {
-                    fields: ["id"],
+                    filters: {
+                        isActive: true
+                    },
                     populate: {
+                        fields: ["position"],
                         username: {
-                            fields: ['englishName', 'chineseName']
+                            fields: ["id", "englishName", "chineseName", "phoneNumber"],
+                            populate: {
+                                image: {
+                                    fields: ["url"]
+                                }
+                            }
                         }
                     }
                 }
-            },
-            orderBy: {
-                className: "asc"
             }
         });
+
+        return classData;
 
     },
 };

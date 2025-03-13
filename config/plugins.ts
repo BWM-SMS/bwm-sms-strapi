@@ -9,7 +9,7 @@ export default ({ env }) => ({
         enabled: true,
         config: {
             provider: 'local',
-            sizeLimit: 3000000, // Set size limit for uploads (in bytes), Max 3 MB
+            sizeLimit: 10000000, // Set size limit for uploads (in bytes), Max 3 MB
             actionOptions: {
                 upload: {
                     // Restrict file types to photos only

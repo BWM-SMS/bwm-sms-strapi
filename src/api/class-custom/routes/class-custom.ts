@@ -1,13 +1,9 @@
 export default {
   routes: [
     {
-     method: 'GET',
-     path: '/class-custom',
-     handler: 'class-custom.exampleAction',
-     config: {
-       policies: [],
-       middlewares: [],
-     },
-    },
+      method: 'GET',
+      path: '/class/me',
+      handler: 'class-custom.myClass',
+    }
   ],
 };
