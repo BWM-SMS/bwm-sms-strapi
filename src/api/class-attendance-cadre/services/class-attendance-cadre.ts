@@ -112,7 +112,7 @@ module.exports = {
                     },
                     populate: {
                         classAttendanceDetails: {
-                            fields: ["isAttend"],
+                            fields: ["isAttend", "position"],
                         },
                     },
                     sort: "date:desc"
