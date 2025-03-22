@@ -135,7 +135,7 @@ module.exports = {
                             fields: ["isAttend", "position"],
                             populate: {
                                 username: {
-                                    fields: ["englishName", "chineseName"],
+                                    fields: ["englishName", "chineseName", "username"],
                                 },
                             }
                         },
