@@ -230,7 +230,7 @@ module.exports = {
                 },
                 populate: {
                     classAttendance: {
-                        fields: ["date", "type", "lesson"],
+                        fields: ["date", "type", "lesson", "note"],
                     }
                 }
             });
