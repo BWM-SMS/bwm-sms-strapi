@@ -203,7 +203,7 @@ module.exports = {
                 },
                 populate: {
                     classAttendance: {
-                        fields: ["id", "date", "type", "lesson"],
+                        fields: ["id", "date", "type", "lesson", "note"],
                     },
                 },
                 sort: "createdAt:desc"
