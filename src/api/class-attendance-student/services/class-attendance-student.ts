@@ -56,7 +56,7 @@ module.exports = {
 
 
             const currentDate: Date = new Date();
-            const closeSubmitNHour = 24 // In Hour, Replace to Strapi Configuration
+            const closeSubmitNHour = 48 // In Hour, Replace to Strapi Configuration
 
             // Loop through each class in classData
             for (const classItem of classData) {
