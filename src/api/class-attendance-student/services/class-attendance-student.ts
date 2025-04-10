@@ -187,7 +187,7 @@ module.exports = {
             const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const type = paramType == "other" ? { $ne: "A. 研讨班" as const } : { $eq: "A. 研讨班" as const };
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const classData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({

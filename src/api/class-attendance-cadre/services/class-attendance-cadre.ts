@@ -93,8 +93,8 @@ module.exports = {
             const paramType = URL_Request.getTypeFromUrl(ctx.request, 'type');
             const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
             const type = paramType == "other" ? { $ne: "A. 研讨班" as const } : { $eq: "A. 研讨班" as const };
-            
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             let attendanceData
@@ -156,7 +156,7 @@ module.exports = {
 
             const currentDate = new Date();
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const attendanceData = await strapi.documents('api::user-class.user-class').findMany({
@@ -201,7 +201,7 @@ module.exports = {
 
             const currentDate = new Date();
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const userData = await strapi.documents('plugin::users-permissions.user').findOne({
@@ -210,6 +210,20 @@ module.exports = {
                 populate: {
                     image: {
                         fields: ["url"]
+                    }
+                }
+            });
+
+            const classData = await strapi.documents('api::class.class').findOne({
+                documentId: classId,
+                fields: ["className"],
+                populate: {
+                    userClasses: {
+                        filters: {
+                            username: {
+                                documentId: studentId,
+                            },
+                        }
                     }
                 }
             });
@@ -234,7 +248,7 @@ module.exports = {
                     }
                 }
             });
-            return { user: userData, attendance: attendanceData };
+            return { user: userData, class: classData, attendance: attendanceData };
         } catch (err) {
             console.error('Error in class attendance history by student service:', err);
             throw err;
