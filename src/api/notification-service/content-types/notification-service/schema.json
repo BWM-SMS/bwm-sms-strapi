@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notification_services",
+  "info": {
+    "singularName": "notification-service",
+    "pluralName": "notification-services",
+    "displayName": "Notification Service",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "username": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notificationServices"
+    },
+    "payload": {
+      "type": "json",
+      "required": true
+    }
+  }
+}

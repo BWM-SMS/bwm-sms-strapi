@@ -175,6 +175,12 @@
       "target": "api::sus-feedback.sus-feedback",
       "private": true,
       "mappedBy": "username"
+    },
+    "notificationServices": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notification-service.notification-service",
+      "mappedBy": "username"
     }
   }
 }

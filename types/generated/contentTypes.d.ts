@@ -737,6 +737,40 @@ export interface ApiHolidayScheduleHolidaySchedule
   };
 }
 
+export interface ApiNotificationServiceNotificationService
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notification_services';
+  info: {
+    description: '';
+    displayName: 'Notification Service';
+    pluralName: 'notification-services';
+    singularName: 'notification-service';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification-service.notification-service'
+    > &
+      Schema.Attribute.Private;
+    payload: Schema.Attribute.JSON & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    username: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
 export interface ApiSusFeedbackSusFeedback extends Struct.CollectionTypeSchema {
   collectionName: 'sus_feedbacks';
   info: {
@@ -1440,6 +1474,10 @@ export interface PluginUsersPermissionsUser
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    notificationServices: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification-service.notification-service'
+    >;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1519,6 +1557,7 @@ declare module '@strapi/strapi' {
       'api::configuration.configuration': ApiConfigurationConfiguration;
       'api::enrollment.enrollment': ApiEnrollmentEnrollment;
       'api::holiday-schedule.holiday-schedule': ApiHolidayScheduleHolidaySchedule;
+      'api::notification-service.notification-service': ApiNotificationServiceNotificationService;
       'api::sus-feedback.sus-feedback': ApiSusFeedbackSusFeedback;
       'api::user-class.user-class': ApiUserClassUserClass;
       'plugin::content-releases.release': PluginContentReleasesRelease;
