@@ -1,6 +1,7 @@
 import type { Core } from '@strapi/strapi';
 import lifecycles from './extensions/users-permissions/content-types/user/lifecycles';
 import { Encryption } from './utils/encryption';
+import { Notification } from './utils/notification';
 
 export default {
   /**
@@ -27,5 +28,8 @@ export default {
 
     // Init Encryption model
     // Encryption.initEncryption()
+
+    // Init Notification model
+     Notification.initNotification()
   },
 };
