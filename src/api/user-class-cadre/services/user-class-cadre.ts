@@ -6,7 +6,7 @@
  */
 
 
-const { createCoreService: createCoreServiceAttendanceCadre } = require('@strapi/strapi').factories;
+const { createCoreService: createCoreServiceUserClassCadre } = require('@strapi/strapi').factories;
 
 module.exports = {
     async resetPasswordService(ctx) {

@@ -6,12 +6,6 @@ import { Notification } from '../../../../utils/notification';
 export default {
   async afterCreate(event) {
     const { result } = event;
-    Notification.pushNotification(result.payload, 'Notification', 'Successfully Subscribed to Notification')
-      .then((response) => {
-        console.log('Notification sent successfully', response);
-      })
-      .catch((error) => {
-        console.error('Error sending notification', error);
-      });
+    Notification.pushNotification(result.payload, 'Notification', 'Successfully Subscribed to Notification');
   }
 };

@@ -47,6 +47,10 @@ function getTimeString(date: Date): string {
     return newDate.toTimeString().split(' ')[0];
 }
 
+function getDateString(date: Date): string {
+   return date.toLocaleDateString('en-CA'); // Format the date as YYYY-MM-DD
+}
+
 function getLastNMonthsDate(currentDate: Date, n: number): Date {
     const newDate = new Date(currentDate); // Create a new Date object to avoid mutating the original
     newDate.setMonth(newDate.getMonth() - n);
@@ -92,6 +96,7 @@ const DateTime = {
     addDurationToTime,
     subtractDurationFromTime,
     getTimeString,
+    getDateString,
     getLastNMonthsDate,
     nextDateBasedDay,
     getWeekStartAndEndDate,
