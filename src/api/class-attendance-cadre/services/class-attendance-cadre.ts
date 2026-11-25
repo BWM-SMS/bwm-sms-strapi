@@ -89,7 +89,7 @@ module.exports = {
             const paramAttendanceId = URL_Request.getTypeFromUrl(ctx.request, 'attendanceId');
             const type = paramType == "other" ? { $ne: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" } : { $eq: "A. 研讨班" as "A. 研讨班" | "B. 忆师恩" };
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             let attendanceData
@@ -151,7 +151,7 @@ module.exports = {
 
             const currentDate = new Date();
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const attendanceData = await strapi.documents('api::user-class.user-class').findMany({
@@ -193,7 +193,7 @@ module.exports = {
 
             const currentDate = new Date();
 
-            const lastNMonthHistory = 3 // Replace to Strapi Configuration
+            const lastNMonthHistory = 12 // Replace to Strapi Configuration
             const lastDateHistory = DateTime.getLastNMonthsDate(currentDate, lastNMonthHistory);
 
             const attendanceData = await strapi.documents('api::class-attendance-detail.class-attendance-detail').findMany({
